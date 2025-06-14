@@ -1,26 +1,43 @@
 # UrbanHome
 
-UrbanHome est une application web de gestion immobilière basée sur le modèle MVC (Modèle-Vue-Contrôleur).
+UrbanHome est une application web de gestion immobilière moderne, développée en PHP avec une architecture MVC complète. Elle permet la gestion de biens, utilisateurs (clients, bailleurs, agents, managers), transactions, rendez-vous, messagerie et bien plus, avec une interface responsive et sécurisée.
 
-## Fonctionnalités principales
+## 🚀 Fonctionnalités principales
 
-- Architecture MVC (Model, View, Controllers)
-- Utilisation de Composer et de l'autoload PHP
-- Gestion multi-utilisateurs : client, bailleur, manager
-- PHPMailer pour l'envoi des codes d'inscription ou de réinitialisation
-- Sécurité : token CSRF, redirection HTTPS
+- Architecture MVC stricte (Model, View, Controller)
+- Gestion multi-profils : client, bailleur, agent, manager
+- Authentification sécurisée, gestion des sessions, tokens CSRF
+- PHPMailer pour l'envoi d'e-mails (inscription, réinitialisation de mot de passe)
+- Interface utilisateur moderne et responsive (HTML5, CSS3, JS)
+- Gestion des propriétés : ajout, modification, suppression, consultation, validation
+- Tableaux de bord personnalisés selon le profil utilisateur
+- Système de messagerie interne (clients ↔ bailleurs, clients ↔ agents)
+- Gestion des rendez-vous, favoris, achats, paiements
 - Pages d'erreur personnalisées (404, 500)
-- Interface responsive et moderne
+- Sécurité renforcée : redirection HTTPS, validation des entrées, gestion des droits d'accès
+- Rafraîchissement automatique, menu responsive, gestion du burger menu
 
-## Installation
+## 🛠️ Installation rapide
 
-1. Placer le projet dans un serveur web local (WAMP, XAMPP, etc.) supportant PHP et MySQL
+1. **Cloner ou télécharger le projet** dans un dossier de votre serveur local (WAMP, XAMPP, etc.) supportant PHP >= 7.4 et MySQL.
+2. **Importer la base de données** :
+   - Fichier : `urbanhome.sql`
+   - Utilisez phpMyAdmin ou la ligne de commande MySQL :
 
-2. Importer la base de données fournie dans votre serveur MySQL
+     ```sql
+     source urbanhome.sql;
+     ```
 
-3. Ouvrir le projet dans un éditeur de code (VSCode, PhpStorm, etc.)
+3. **Configurer les variables d'environnement** dans le fichier `.env` à la racine :
 
-4. Installer les dépendances Composer :
+   ```env
+   DB_HOST='localhost'
+   DB_NAME='urbanhome'
+   DB_USER='root'
+   DB_PASS=''
+   ```
+
+4. **Installer les dépendances Composer** :
 
    ```powershell
    composer install
@@ -28,103 +45,133 @@ UrbanHome est une application web de gestion immobilière basée sur le modèle 
    composer require vlucas/phpdotenv
    ```
 
-5. Configurer les variables d'environnement dans un fichier `.env` (exemple : connexion à la base de données).
-
-6. Lancer le serveur PHP intégré :
+5. **Lancer le serveur PHP intégré** (ou configurer Apache/Nginx) :
 
    ```powershell
    php -S localhost:8000 -t public
    ```
 
-7. Accéder à l'application via [http://localhost:8000](http://localhost:8000)
+6. **Accéder à l'application** : [http://localhost:8000](http://localhost:8000)
 
-## Structure des dossiers
+## 🗂️ Structure des dossiers
 
-- `public/` : point d'entrée de l'application (front controller)
-
+- `public/` : point d'entrée de l'application (front controller, index.php)
 - `views/` : vues et layouts (header, footer, navbar, erreurs, etc.)
+- `controllers/` : contrôleurs pour chaque rôle (Bailleur, Client, Agent, Manager, Home)
+- `model/` : modèles et accès base de données (propriétés, utilisateurs, paiements, etc.)
+- `config/` : configuration (connexion PDO, chargement .env)
+- `routes/` : gestion des routes (`Router.php`)
+- `public/assets/` : ressources statiques (CSS, JS, images)
+- `src/` : initialisation de l'application (App.php)
 
-- `controllers/` : contrôleurs pour gérer la logique métier
-
-- `model/` : modèles et accès base de données
-
-- `config/` : configuration (connexion PDO, etc.)
-
-- `routes/` : gestion des routes définies dans `Router.php`
-
-- `assets/` : ressources statiques (CSS, JS, images)
-
-## Routes principales
+## 🌐 Exemples de routes principales
 
 ### Public
 
 - `/` : Page d'accueil
-
 - `/public/about` : À propos
-
 - `/public/contact` : Contact
+- `/public/search` : Recherche
 
 ### Propriétés
 
 - `/propriete/liste` : Liste des propriétés
-
 - `/propriete/detail` : Détail d'une propriété
 
 ### Bailleur
 
 - `/bailleur` : Connexion bailleur
-
 - `/bailleur/inscription` : Inscription bailleur
-
 - `/bailleur/dashboard` : Tableau de bord du bailleur
-
-- `/bailleur/biens` : Gestion des biens
-
-- `/bailleur/contrats` : Gestion des contrats
-
-- `/bailleur/paiements` : Gestion des paiements
-
+- `/bailleur/propriete` : Liste des biens
+- `/bailleur/contrats` : Contrats
+- `/bailleur/paiements` : Paiements
 - `/bailleur/messages` : Messagerie
+- `/bailleur/conversations` : Discussions
+- `/bailleur/NouveauMessage` : Nouveau message
+- `/ventes-locations` : Demandes d'achat/location
 
 ### Client
 
-- `/client/dashboard` : Tableau de bord du client
+- `/client` : Connexion client
+- `/Mon-inscription` : Inscription client
+- `/tableau-de-bord` : Tableau de bord
+- `/listes-proprietes` : Liste des propriétés
+- `/propriete/mes-proprietes-favoris` : Favoris
+- `/mes-rendez-vous` : Rendez-vous
+- `/fil-de-discussion` : Messagerie
+- `/Acheter-proprietes` : Achat de propriété
 
-- `/client/locations` : Liste des locations
+### Agent
 
-## Fonctionnalités récentes
+- `/connexion-agent` : Connexion agent
+- `/home-agent` : Tableau de bord agent
+- `/demandes-validation` : Propriétés à valider
+- `/clients-attribues` : Clients attribués
+- `/clients-rdv-bailleurs` : Rendez-vous clients/bailleurs
+- `/listes-achat-valider` : Achats à valider
 
-- Gestion des propriétés : ajout, modification, suppression.
+### Manager
 
-- Messages flash basés sur les sessions pour les retours utilisateur.
+- `/manager` : Connexion manager
+- `/manager/dashboard` : Tableau de bord manager
+- `/manager/clients` : Gestion des clients
+- `/manager/biens` : Gestion des biens
+- `/manager/contrats` : Contrats
+- `/manager/paiements` : Paiements
+- `/manager/messages` : Messagerie
 
-- Formulaires dynamiques pour les bailleurs et les clients.
+## ✨ Fonctionnalités avancées
 
-- Tableau de bord interactif pour les bailleurs avec indicateurs clés (KPI).
+- Gestion avancée des propriétés (CRUD, validation, affectation)
+- Messages flash pour les retours utilisateur
+- Formulaires dynamiques pour chaque profil
+- Tableaux de bord interactifs avec indicateurs clés (KPI)
+- Système de messagerie interne multi-profils
+- Gestion des rendez-vous et notifications
+- Sécurité : CSRF, HTTPS, validation, gestion des droits
+- Rafraîchissement automatique, menu responsive, burger menu JS
 
-## Conseils
+## 💡 Conseils d'utilisation
 
-- Adaptez les fichiers de configuration à votre environnement (BDD, mail, etc.).
+- Adaptez les fichiers de configuration à votre environnement (BDD, mail, etc.)
+- Pour la production, configurez votre serveur pour que seul le dossier `public/` soit accessible publiquement
+- Personnalisez les pages d'erreur dans `views/error/`
+- Pensez à sécuriser vos accès et à mettre à jour vos dépendances
 
-- Pour la production, configurez votre serveur pour que seul le dossier `public/` soit accessible publiquement.
+## 📊 Exemple de configuration `.env`
 
-- Consultez les fichiers d'exemple dans `views/error/` pour personnaliser les pages d'erreur.
+```env
+DB_HOST='localhost'
+DB_NAME='urbanhome'
+DB_USER='root'
+DB_PASS=''
+```
 
-## Tableau de bord du bailleur
+## 🗄️ Exemple d'import de la base de données
 
-Le tableau de bord du bailleur inclut :
+- Fichier fourni : `urbanhome.sql`
+- Compatible MySQL/MariaDB
+- Contient toutes les tables nécessaires (propriétés, utilisateurs, paiements, rendez-vous, etc.)
 
-- **En-tête** : Vue d'ensemble des indicateurs clés (KPI).
+## 📊 Tableaux de bord & UX
 
-- **Liste des propriétés** : Gestion des biens immobiliers.
+- **Bailleur** : gestion des biens, contrats, paiements, messagerie, indicateurs clés
+- **Client** : gestion des locations, favoris, paiements, messagerie, rendez-vous
+- **Agent** : validation de propriétés, gestion des clients, rendez-vous, paiements
+- **Manager** : supervision globale, gestion des utilisateurs, biens, contrats, paiements
 
-- **Contrats** : Suivi des contrats en cours et terminés.
+## 🧩 Technologies utilisées
 
-- **Paiements** : Historique et gestion des paiements.
+- PHP 7.4+
+- MySQL/MariaDB
+- Composer (autoload PSR-4, dotenv)
+- HTML5, CSS3, JavaScript (menu responsive, auto-refresh)
+- PHPMailer
 
-- **Messagerie** : Communication avec les clients et gestion des messages.
+---
 
-- **Actions rapides** : Ajout de nouvelles propriétés, gestion des profils, etc.
+**Bonne utilisation de UrbanHome !**
 
-Bonne utilisation de UrbanHome !
+Pour toute question ou contribution, n'hésitez pas à ouvrir une issue ou une pull request.
 
