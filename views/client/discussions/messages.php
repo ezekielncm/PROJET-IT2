@@ -16,10 +16,10 @@
 
     <!-- Zone de discussion -->
     <section class="messagerie-discussion">
-        <header class="messagerie-discussion-header">
+        <div class="messagerie-discussion-header">
             <h2>💬 Discussion</h2>
             <a href="/client" class="messagerie-retour">Retour</a>
-        </header>
+        </div>
         <div id="messages-container" class="messagerie-messages">
             <?php if (!empty($message_bailleurs)): ?>
                 <?php foreach ($message_bailleurs as $msg): ?>
