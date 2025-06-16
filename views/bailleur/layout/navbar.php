@@ -10,7 +10,7 @@
         <li><a href="/mes-proprietes">Mes Propriétés</a></li>
         <li><a href="/voir-mes-demande-de-visite">Demandes reçues</a></li>
         <li><a href="/bailleur/conversations">Mes conversations</a></li>
-        <li><a href="Mon-profil?id=<?= $encodedId ?>">Profil</a></li>
+        <li><a href="/Mon-profil?id=<?= $encodedId ?>">Profil</a></li>
         <li><a href="#" onclick="openLogoutModal()" class="logout-link">Déconnexion</a></li>
     </ul>
     <!-- Modal de confirmation -->
