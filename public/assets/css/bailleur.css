@@ -1,5 +1,480 @@
+/* === Mes Propriétés Bailleur === */
+.bailleur-prop-list-container {
+    max-width: 1100px;
+    margin: 2.5rem auto;
+    padding: 1.5rem;
+    background: #f8f8ff;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(108,99,255,0.07);
+}
+.bailleur-prop-back {
+    color: #6c63ff;
+    text-decoration: underline;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    font-size: 1.08rem;
+    transition: color 0.2s;
+}
+.bailleur-prop-back:hover {
+    color: #5146d6;
+}
+.bailleur-prop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+.bailleur-prop-card {
+    background: #fff;
+    border-radius: 1.1rem;
+    box-shadow: 0 2px 8px rgba(108,99,255,0.07);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s;
+}
+.bailleur-prop-card:hover {
+    box-shadow: 0 8px 24px rgba(108,99,255,0.13);
+}
+.bailleur-prop-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 1.1rem 1.1rem 0 0;
+    background: #f3f3f3;
+}
+.bailleur-prop-card-body {
+    padding: 1.2rem 1.3rem 1.3rem 1.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.bailleur-prop-price {
+    font-size: 1.25rem;
+    color: #6c63ff;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+.bailleur-prop-info {
+    color: #333;
+    font-size: 1.02rem;
+    margin-bottom: 0.2rem;
+}
+.bailleur-prop-info span {
+    color: #5146d6;
+    font-weight: 500;
+}
+.bailleur-prop-btn {
+    display: inline-block;
+    background: #6c63ff;
+    color: #fff;
+    border-radius: 999px;
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    margin-top: 0.7rem;
+    transition: background 0.2s;
+    box-shadow: 0 1px 4px rgba(108,99,255,0.07);
+}
+.bailleur-prop-btn:hover {
+    background: #5146d6;
+}
+.bailleur-prop-pagination {
+    display: flex;
+    justify-content: center;
+    margin: 2.5rem 0 1.5rem 0;
+}
+.bailleur-prop-page-btn {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    margin: 0 0.15rem;
+    border-radius: 8px;
+    background: #fff;
+    color: #6c63ff;
+    border: 1px solid #e5e7eb;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+    min-width: 38px;
+    text-align: center;
+}
+.bailleur-prop-page-btn.active, .bailleur-prop-page-btn:hover {
+    background: #6c63ff;
+    color: #fff;
+    border-color: #6c63ff;
+}
+.bailleur-prop-page-btn.disabled {
+    background: #ececec;
+    color: #bbb;
+    cursor: not-allowed;
+    border-color: #ececec;
+}
+
+@media (max-width: 900px) {
+    .bailleur-prop-list-container {
+        padding: 0.7rem;
+    }
+    .bailleur-prop-grid {
+        gap: 1.1rem;
+    }
+    .bailleur-prop-card-body {
+        padding: 0.7rem 0.7rem 1rem 0.7rem;
+    }
+    .bailleur-prop-img {
+        height: 120px;
+    }
+}
+/* === Drawer Sidebar Bailleur === */
+.sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 1200;
+    display: none;
+}
+.sidebar-overlay.show {
+    display: block;
+}
+.side-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 340px;
+    max-width: 95vw;
+    background: #fff;
+    box-shadow: 0 2px 24px rgba(108,99,255,0.13);
+    border-radius: 16px 0 0 16px;
+    z-index: 1300;
+    transform: translateX(-110%);
+    transition: transform 0.35s cubic-bezier(.77,0,.18,1);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+.side-navbar.open {
+    transform: translateX(0);
+}
+.side-navbar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 1.5rem 1.2rem 1.2rem;
+    border-bottom: 1px solid #ececec;
+}
+.side-navbar-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+.close-sidebar {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #5146d6;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 0.5rem;
+    transition: color 0.2s;
+}
+.close-sidebar:hover {
+    color: #e53e3e;
+}
+.side-navbar-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.side-navbar-list li {
+    border-bottom: 1px solid #f2f2f2;
+}
+.side-navbar-list a {
+    display: block;
+    padding: 1.1rem 1.5rem;
+    color: #222;
+    text-decoration: none;
+    font-size: 1.08rem;
+    transition: background 0.18s, color 0.18s;
+}
+.side-navbar-list a:hover, .side-navbar-list .logout-link:hover {
+    background: #f5f5ff;
+    color: #6c63ff;
+}
+.side-navbar-list .logout-link {
+    color: #e53e3e;
+    font-weight: bold;
+}
+
+/* === Modal Déconnexion Bailleur === */
+.logout-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+.logout-modal.hidden { display: none; }
+.logout-modal-content {
+    background: #fff;
+    border-radius: 18px;
+    padding: 2rem 1.5rem;
+    width: 100%;
+    max-width: 370px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.13);
+    text-align: center;
+}
+.logout-modal-content h2 {
+    font-size: 1.2rem;
+    color: #2d217c;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+.logout-modal-content p {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+.logout-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+.logout-cancel {
+    background: #eee;
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.logout-cancel:hover {
+    background: #ddd;
+}
+.logout-confirm {
+    background: #e53e3e;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.logout-confirm:hover {
+    background: #b30000;
+}
+
+@media (max-width: 600px) {
+    .side-navbar {
+        width: 98vw;
+        border-radius: 0 0 16px 16px;
+    }
+    .side-navbar-header {
+        padding: 1rem 0.7rem 1rem 0.7rem;
+    }
+    .side-navbar-list a {
+        padding: 1rem 0.7rem;
+    }
+    .logout-modal-content {
+        padding: 1.2rem 0.5rem;
+    }
+}
 @media (max-width: 768px){
     aside{
         display: none;
+    }
+}
+
+/* === Dashboard Bailleur === */
+.bailleur-dashboard-container {
+    max-width: 1100px;
+    margin: 2.5rem auto;
+    padding: 1.5rem;
+    background: #f8f8ff;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(108,99,255,0.07);
+}
+.bailleur-dashboard-header {
+    margin-bottom: 2.5rem;
+    text-align: left;
+}
+.bailleur-dashboard-header h1 {
+    font-size: 2.1rem;
+    font-weight: bold;
+    color: #2d217c;
+    margin-bottom: 0.7rem;
+}
+.bailleur-dashboard-header p {
+    color: #6c63ff;
+    font-size: 1.1rem;
+}
+.bailleur-dashboard-cards {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+}
+.bailleur-dashboard-card {
+    background: #fff;
+    border-radius: 1.1rem;
+    box-shadow: 0 2px 8px rgba(108,99,255,0.07);
+    padding: 2rem 1.5rem;
+    flex: 1 1 220px;
+    min-width: 180px;
+    max-width: 260px;
+    text-align: center;
+    transition: box-shadow 0.2s;
+    text-decoration: none;
+    color: #222;
+    margin-bottom: 1.5rem;
+}
+.bailleur-dashboard-card:hover {
+    box-shadow: 0 8px 24px rgba(108,99,255,0.13);
+}
+.bailleur-dashboard-card h3 {
+    font-size: 1.08rem;
+    color: #6c63ff;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+.bailleur-dashboard-nb {
+    font-size: 2.1rem;
+    font-weight: bold;
+    margin: 0.5rem 0 0.7rem 0;
+    display: block;
+}
+.bailleur-blue { color: #2563eb; }
+.bailleur-green { color: #16a34a; }
+.bailleur-indigo { color: #4f46e5; }
+
+.bailleur-dashboard-actions {
+    background: #fff;
+    border-radius: 1.1rem;
+    box-shadow: 0 2px 8px rgba(108,99,255,0.07);
+    padding: 2rem 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.bailleur-dashboard-actions h2 {
+    font-size: 1.15rem;
+    color: #2d217c;
+    margin-bottom: 1.2rem;
+    font-weight: bold;
+}
+.bailleur-dashboard-actions-list {
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+}
+.bailleur-btn {
+    display: inline-block;
+    padding: 0.7rem 1.7rem;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+    box-shadow: 0 1px 4px rgba(108,99,255,0.07);
+    margin-bottom: 0.5rem;
+}
+.bailleur-btn-blue {
+    background: #6c63ff;
+    color: #fff;
+}
+.bailleur-btn-blue:hover {
+    background: #5146d6;
+}
+.bailleur-btn-green {
+    background: #16a34a;
+    color: #fff;
+}
+.bailleur-btn-green:hover {
+    background: #12813a;
+}
+.bailleur-btn-grey {
+    background: #e5e7eb;
+    color: #222;
+}
+.bailleur-btn-grey:hover {
+    background: #cbd5e1;
+}
+
+/* Flash message */
+.bailleur-flash-message {
+    background: #16a34a;
+    color: #fff;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(108,99,255,0.13);
+    font-size: 1.08rem;
+    font-weight: 500;
+    text-align: center;
+    margin: 2rem auto 1.5rem auto;
+    max-width: 600px;
+    z-index: 1200;
+    position: relative;
+    opacity: 1;
+    transition: opacity 0.5s, transform 0.5s;
+}
+.bailleur-flash-out {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.98);
+    pointer-events: none;
+}
+
+/* Erreur non connecté */
+.bailleur-error-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+}
+.bailleur-error-card {
+    background: #fff;
+    padding: 2rem 2.5rem;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(108,99,255,0.07);
+    text-align: center;
+}
+.bailleur-error-card h2 {
+    color: #e53e3e;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+.bailleur-error-card p {
+    color: #333;
+    margin-bottom: 1rem;
+}
+.bailleur-error-card a {
+    color: #2563eb;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+@media (max-width: 900px) {
+    .bailleur-dashboard-cards {
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+    .bailleur-dashboard-card {
+        max-width: 100%;
+    }
+    .bailleur-dashboard-container {
+        padding: 0.7rem;
+    }
+    .bailleur-dashboard-actions {
+        padding: 1rem 0.7rem;
     }
 }
