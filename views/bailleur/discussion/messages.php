@@ -4,19 +4,19 @@
     <aside class="bailleur-messagerie-clients">
         <div class="bailleur-messagerie-clients-title">📋 Clients</div>
         <?php foreach ($messages as $msg): ?>
-            <?php
-            $encoded_id = base64_encode($msg['id_client']);
-            $last_message = '';
-            if (!empty($msg['message_bailleur'])) {
-                $last_message = $msg['message_bailleur'];
-            } elseif (!empty($msg['message_client'])) {
-                $last_message = $msg['message_client'];
-            } else {
-                $last_message = 'Aucun message';
-            }
+            <?php 
+                $encoded_id = base64_encode($msg['id_client']); 
+                $last_message = '';
+                if (!empty($msg['message_bailleur'])) {
+                    $last_message = $msg['message_bailleur'];
+                } elseif (!empty($msg['message_client'])) {
+                    $last_message = $msg['message_client'];
+                } else {
+                    $last_message = 'Aucun message';
+                }
             ?>
             <a href="/bailleur/messages_clients?id=<?= htmlspecialchars($encoded_id) ?>"
-                class="bailleur-messagerie-client-item<?= (isset($id_client) && $id_client === $encoded_id) ? ' active' : '' ?>">
+               class="bailleur-messagerie-client-item<?= (isset($id_client) && $id_client === $encoded_id) ? ' active' : '' ?>">
                 <div class="bailleur-messagerie-client-nom">
                     <?= strtoupper(htmlspecialchars($msg['nom_client'] ?? ($msg['nom'] ?? 'Client'))) ?>
                 </div>
@@ -28,10 +28,10 @@
     </aside>
     <!-- Zone de discussion -->
     <section class="bailleur-messagerie-discussion">
-        <div class="bailleur-messagerie-header">
+        <header class="bailleur-messagerie-header">
             <h2>💬 Discussion</h2>
             <a href="/home-bailleur" class="bailleur-messagerie-retour">Retour</a>
-        </div>
+        </header>
         <div id="messages-container" class="bailleur-messagerie-messages">
             <?php if (!empty($message_clients)): ?>
                 <?php foreach ($message_clients as $msg): ?>
@@ -70,7 +70,7 @@
 <script>
     const container = document.getElementById("messages-container");
     const scrollBtn = document.getElementById("scrollTopBtn");
-    if (container) {
+    if(container){
         container.scrollTop = container.scrollHeight;
         container.addEventListener("scroll", () => {
             if (container.scrollTop > 200) {
@@ -80,10 +80,7 @@
             }
         });
         scrollBtn.addEventListener("click", () => {
-            container.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            container.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
 </script>
