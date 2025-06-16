@@ -1,5 +1,4 @@
 <?php require_once VIEW_PATH . 'public/layout/header.php'; ?>
-<script src="https://cdn.tailwindcss.com"></script>
 
 <div class="py-12 bg-gray-100 min-h-screen">
     <div class="max-w-7xl mx-auto px-6">
@@ -11,8 +10,8 @@
 
         <!-- Grille de cartes -->
         <?php foreach ($bannieres as $banniere): ?>
-            <section class="bg-[url('assets/images/ <?= $banniere['im'] ?> ')] bg-cover bg-center py-16">
-            <?php endforeach; ?>
+            <section class="bg-cover bg-center py-16" style="background-image: url('assets/images/<?= $banniere['im'] ?>');">
+        <?php endforeach; ?>
             <div class="bg-white/80 backdrop-blur-sm px-4 sm:px-8 lg:px-16 py-10 rounded-xl max-w-7xl mx-auto">
 
                 <!-- Description du site -->
@@ -53,6 +52,5 @@
     </div>
 
 </div>
-
 
 <?php require_once VIEW_PATH . 'public/layout/footer.php'; ?>

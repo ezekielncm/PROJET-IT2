@@ -48,3 +48,35 @@ window.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Menu latéral (side-navbar) moderne
+window.addEventListener('DOMContentLoaded', function() {
+    const burger = document.getElementById('burgerMenu');
+    const sidebar = document.getElementById('sideNavbar');
+    const overlay = document.getElementById('sidebarOverlay');
+    const closeBtn = document.getElementById('closeSidebar');
+    const dropdown = document.querySelector('.side-dropdown');
+    const dropBtn = document.querySelector('.side-dropbtn');
+
+    function openSidebar() {
+        sidebar.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeSidebar() {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    if (burger) burger.addEventListener('click', openSidebar);
+    if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+    if (overlay) overlay.addEventListener('click', closeSidebar);
+
+    // Accordéon pour le sous-menu Espace
+    if (dropdown && dropBtn) {
+        dropBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            dropdown.classList.toggle('open');
+        });
+    }
+});

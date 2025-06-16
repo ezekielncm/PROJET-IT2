@@ -1,179 +1,183 @@
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-/* --- Layout type application web --- */
-html, body {
-    height: 100%;
-}
-
+/* --- RESET & BASE --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
 body {
-    margin: 0;
-    padding: 0;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f5f5f5;
     color: #222;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+}
+main { flex: 1 0 auto; padding: 2rem; min-height: 70vh; }
+
+/* --- MENU LATERAL (SIDE DRAWER) --- */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 1000;
+}
+.sidebar-overlay.active {
+    display: block;
+}
+.side-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 320px;
+    max-width: 90vw;
+    background: #fff;
+    box-shadow: 2px 0 16px rgba(0,0,0,0.08);
+    z-index: 1100;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+    border-radius: 0 12px 12px 0;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+.side-navbar.active {
+    transform: translateX(0);
+}
+.side-navbar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 1.5rem 1rem 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+.side-navbar-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #6c63ff;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.close-sidebar {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #6c63ff;
+    cursor: pointer;
+    line-height: 1;
+}
+.side-navbar-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.side-navbar-list > li {
+    border-bottom: 1px solid #f2f2f2;
+}
+.side-navbar-list > li > a,
+.side-navbar-list > li .side-dropbtn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 1.5rem;
+    color: #222;
+    text-decoration: none;
+    font-size: 1.08rem;
+    background: none;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.side-navbar-list > li > a:hover,
+.side-navbar-list > li .side-dropbtn:hover {
+    background: #f5f5f5;
+}
+.side-dropdown {
+    position: relative;
+}
+.side-dropdown-content {
+    display: none;
+    flex-direction: column;
+    background: #f8f8ff;
+    border-radius: 0 0 8px 8px;
+    box-shadow: none;
+    padding: 0.2rem 0 0.2rem 0.5rem;
+}
+.side-dropdown.open > .side-dropdown-content {
+    display: flex;
+}
+.side-dropdown-content li a {
+    color: #444;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    text-decoration: none;
+    display: block;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+.side-dropdown-content li a:hover {
+    background: #e6e6ff;
+}
+.chevron {
+    font-size: 1.2em;
+    margin-left: 0.5em;
+    color: #6c63ff;
+    transition: transform 0.2s;
+}
+.side-dropdown.open > .side-dropbtn .chevron {
+    transform: rotate(90deg);
 }
 
-main {
-    flex: 1 0 auto;
-    padding: 2rem;
-    min-height: 70vh;
-}
-
-
-/* --- Fin layout application web --- */
-/* Responsive design */
-@media (max-width: 900px) {
-    nav ul {
-        flex-direction: column;
-        gap: 0.5rem;
-        align-items: flex-start;
-    }
-    main {
-        padding: 1rem;
-    }
-
-}
-
-@media (max-width: 600px) {
-    body {
-        font-size: 0.95rem;
-    }
-    header, nav, footer {
-        padding: 0.5rem;
-    }
-    nav ul {
-        gap: 0.2rem;
-    }
-    main {
-        padding: 0.5rem;
-    }
-    .home-banner h1 {
-        font-size: 1.3rem;
-    }
-    .home-section h2 {
-        font-size: 1.1rem;
-    }
-    .navbar {
-        display: none;
-    };
-    .burger {
-        display: block;
-        cursor: pointer;
-    }
-    
-}
-header, nav, footer {
-    background-color: #6c63ff;
-    color: #fff;
-    padding: 1rem;
-}
+/* --- HEADER --- */
 header {
     display: flex;
     align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
+    background: #6c63ff;
+    padding: 1rem 2rem;
     width: 100%;
     box-sizing: border-box;
     position: relative;
-    background: #6c63ff;
-    padding: 1rem;
-    justify-content: flex-start;
+    z-index: 100;
 }
-nav ul{
+.logo {
     display: flex;
-    flex-direction: row;
     align-items: center;
+    gap: 0.5rem;
 }
-.logo a{
-    display: flex;
-    flex-direction: row;
-}
-.logo img {
+.logo-img {
     width: 40px;
     height: 40px;
-    margin-right: 0.5rem;
     border-radius: 10px;
 }
 .logo-text {
     font-size: 1.5rem;
     font-weight: bold;
     color: #fff;
+    line-height: 1;
 }
-.logo-text:active {
+.logo a {
     text-decoration: none;
 }
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 1.5rem;
-}
 
-nav a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.2s;
-}
-
-nav a:hover {
-    color: #ffb347;
-}
-.burger .active{
-    display: block;
-    cursor: pointer;
-}
-.burger span{
-    width: 30px;
-    height: 3px;
-    gap: 0.5rem;
-    background-color: #fff;
-    margin: 4px 0;
-    transition: all 0.3s;
-    border-radius: 2px;
-}
-.burger .active{
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-}
 .burger {
-    display: none;
+    display: flex;
     flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
     cursor: pointer;
-    margin-right: 1rem;
-    z-index: 1001;
-    order: 1;
+    margin-left: 1rem;
 }
-
-.navbar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: auto;
-    margin-left: 2rem;
-}
-
-.navbar.active {
-    display: flex;
-}
-
-footer {
-    text-align: center;
-    font-size: 0.9rem;
-    color: #fff;
-    margin-top: 2rem;
-    position: relative;
-    bottom: 0%;
-    /* Pas de position: fixed pour un footer "normal" d'appli web */
-    flex-shrink: 0;
+.burger span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background: #fff;
+    border-radius: 2px;
+    transition: all 0.3s;
 }
 
 .auth {
@@ -181,26 +185,46 @@ footer {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    order: 3;
 }
 .auth-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #6c63ff;
     font-size: 1.3rem;
 }
-.auth-text {
+.auth-text a {
     color: #fff;
-    font-weight: 600;
-    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    background: #6c63ff;
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+.auth-text a:hover {
+    background: #5146d6;
+}
+
+footer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #fff;
+    background: #222;
+    padding: 1.5rem 0 1rem 0;
+    margin-top: auto;
+    width: 100%;
+    flex-shrink: 0;
+    position: relative;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
 }
 
 @media (max-width: 900px) {
+    .side-navbar {
+        width: 90vw;
+        max-width: 100vw;
+    }
+    header {
+        padding: 0.7rem 0.7rem;
+    }
     .logo {
         font-size: 1.3rem;
     }
@@ -209,51 +233,6 @@ footer {
     }
 }
 @media (max-width: 600px) {
-    header {
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        padding: 0.7rem;
-    }
-    .burger {
-        display: flex;
-        order: 1;
-        margin-right: 0.7rem;
-    }
-    .logo {
-        order: 2;
-        margin-right: auto;
-        font-size: 1.3rem;
-        
-    }
-    .auth {
-        order: 3;
-        margin-left: 0;
-        position: absolute;
-        right: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-    .navbar {
-        display: none;
-        flex-direction: column;
-        width:fit-content;
-        background: #6c63ff;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        z-index: 1000;
-        padding: 1rem 0;
-        margin-left: 0;
-    }
-    .navbar.active {
-        display: flex;
-    }
-    nav ul {
-        flex-direction: column;
-        gap: 0.2rem;
-        width: 100%;
-        align-items: flex-start;
-    }
+    main { padding: 0.5rem; }
 }
 
