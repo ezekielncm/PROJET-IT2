@@ -28,10 +28,10 @@
     </aside>
     <!-- Zone de discussion -->
     <section class="bailleur-messagerie-discussion">
-        <header class="bailleur-messagerie-header">
+        <div class="bailleur-messagerie-header">
             <h2>💬 Discussion</h2>
             <a href="/home-bailleur" class="bailleur-messagerie-retour">Retour</a>
-        </header>
+            </div>
         <div id="messages-container" class="bailleur-messagerie-messages">
             <?php if (!empty($message_clients)): ?>
                 <?php foreach ($message_clients as $msg): ?>
