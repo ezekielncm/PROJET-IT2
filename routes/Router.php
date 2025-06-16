@@ -29,7 +29,7 @@ class Router {
         '/bailleur/messages' => ['controllers\BailleurControllers', 'listMessages'],
 
         //client routes
-        '/client' => ['controllers\ClientControllers', 'login'],
+        '/client' => ['controllers\ClientControllers', 'LoginClient'],
         '/client/inscription' => ['controllers\ClientControllers', 'register'],
         '/client/logout' => ['controllers\ClientControllers', 'logout'],
         '/client/dashboard' => ['controllers\ClientControllers', 'dashboard'],

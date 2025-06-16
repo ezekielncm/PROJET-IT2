@@ -1,4 +1,4 @@
-<nav>
+<nav id="mainNavbar" class="navbar">
     <ul>
         <li><a href="/">Accueil</a></li>
         <li><a href="/propriete">Propriété</a></li>
