@@ -17,7 +17,7 @@ main { flex: 1 0 auto; padding: 2rem; min-height: 70vh; }
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
     background: rgba(0,0,0,0.35);
-    z-index: 1000;
+    z-index: 1000 !important;
 }
 .sidebar-overlay.active {
     display: block;
@@ -31,7 +31,7 @@ main { flex: 1 0 auto; padding: 2rem; min-height: 70vh; }
     max-width: 90vw;
     background: #fff;
     box-shadow: 2px 0 16px rgba(0,0,0,0.08);
-    z-index: 1100;
+    z-index: 1100 !important;
     transform: translateX(-100%);
     transition: transform 0.3s cubic-bezier(.4,0,.2,1);
     border-radius: 0 12px 12px 0;
@@ -137,7 +137,7 @@ header {
     width: 100%;
     box-sizing: border-box;
     position: relative;
-    z-index: 100;
+    z-index: 900 !important;
 }
 .logo {
     display: flex;
@@ -235,4 +235,6 @@ footer {
 @media (max-width: 600px) {
     main { padding: 0.5rem; }
 }
+
+/* === Messagerie Client === */
 
