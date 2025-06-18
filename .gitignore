@@ -401,6 +401,8 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+.rar
+.zip
 
 # JetBrains Rider
 *.sln.iml
