@@ -38,12 +38,12 @@ class Router {
         '/client/messages' => ['controllers\ClientControllers', 'listMessages'],
 
         //manager routes
-        '/manager' => ['controllers\ManagerControllers', 'login'],
-        '/manager/inscription' => ['controllers\ManagerControllers', 'register'],
-        '/manager/logout' => ['controllers\ManagerControllers', 'logout'],
+        '/manager' => ['controllers\ManagerControllers', 'loginManager'],
+        '/manager/inscription' => ['controllers\ManagerControllers', 'addManager'],
+        '/manager/logout' => ['controllers\ManagerControllers', 'logoutManager'],
         '/manager/dashboard' => ['controllers\ManagerControllers', 'dashboard'],
         '/manager/clients' => ['controllers\ManagerControllers', 'listClients'],
-        '/manager/biens' => ['controllers\ManagerControllers', 'listBiens'],
+        '/manager/proprietes' => ['controllers\ManagerControllers', 'listProprietes'],
         '/manager/contrats' => ['controllers\ManagerControllers', 'listContrats'],
         '/manager/paiements' => ['controllers\ManagerControllers', 'listPaiements'],
         '/manager/messages' => ['controllers\ManagerControllers', 'listMessages'],

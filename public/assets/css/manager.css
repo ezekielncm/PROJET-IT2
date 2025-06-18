@@ -1,0 +1,368 @@
+/* === Connexion & Inscription Manager === */
+.manager-auth-container {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fd;
+}
+.manager-auth-box {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 2px 16px rgba(108,99,255,0.10);
+    padding: 2.5rem 2rem 2rem 2rem;
+    max-width: 400px;
+    width: 100%;
+    margin: 2rem auto;
+}
+.manager-auth-title {
+    text-align: center;
+    color: #6c63ff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+.manager-form-group {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.manager-form-group label {
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+    color: #444;
+}
+.manager-form-group input {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border: 1.5px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    background: #f5f5fa;
+    transition: border 0.2s;
+}
+.manager-form-group input:focus {
+    border: 1.5px solid #6c63ff;
+    outline: none;
+    background: #fff;
+}
+.manager-btn-auth {
+    width: 100%;
+    background: #6c63ff;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.9rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(108,99,255,0.08);
+    transition: background 0.2s, color 0.2s;
+}
+.manager-btn-auth:hover {
+    background: #ffb347;
+    color: #222;
+}
+.manager-auth-links {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+.manager-auth-links a {
+    color: #6c63ff;
+    text-decoration: underline;
+    font-weight: 500;
+    font-size: 1rem;
+}
+.manager-auth-links a:hover {
+    color: #ffb347;
+}
+
+.manager-sidebar {
+    background: #6c63ff;
+    color: #fff;
+    min-width: 220px;
+    max-width: 260px;
+    padding: 2.2rem 1.2rem 2rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 100vh;
+    box-shadow: 2px 0 12px rgba(108,99,255,0.08);
+    z-index: 100;
+}
+.manager-sidebar-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 2.2rem;
+    letter-spacing: 1px;
+}
+.manager-sidebar-list {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+.manager-sidebar-list li {
+    margin-bottom: 1.1rem;
+}
+.manager-sidebar-list a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.08rem;
+    padding: 0.7rem 1.1rem;
+    border-radius: 0.5rem;
+    display: block;
+    transition: background 0.2s, color 0.2s;
+}
+.manager-sidebar-list a:hover, .manager-sidebar-list .manager-logout-link:hover {
+    background: #ffb347;
+    color: #222;
+}
+.manager-logout-link {
+    color: #ffb347;
+    font-weight: bold;
+}
+/* Modal déconnexion */
+.manager-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.manager-modal {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 2px 16px rgba(108,99,255,0.13);
+    padding: 2.2rem 2rem 1.5rem 2rem;
+    max-width: 350px;
+    width: 100%;
+    text-align: center;
+}
+.manager-modal h2 {
+    color: #6c63ff;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+.manager-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+.manager-btn-auth.manager-btn-secondary {
+    background: #fff;
+    color: #6c63ff;
+    border: 1.5px solid #6c63ff;
+}
+.manager-btn-auth.manager-btn-secondary:hover {
+    background: #6c63ff;
+    color: #fff;
+}
+.manager-btn-auth.manager-btn-danger {
+    background: #c0392b;
+    color: #fff;
+    border: none;
+}
+.manager-btn-auth.manager-btn-danger:hover {
+    background: #ffb347;
+    color: #222;
+}
+@media (max-width: 900px) {
+    .manager-navbar {
+        flex-direction: column;
+    }
+    .manager-sidebar {
+        min-width: 100vw;
+        max-width: 100vw;
+        flex-direction: row;
+        align-items: center;
+        padding: 1.2rem 0.5rem;
+        min-height: unset;
+        box-shadow: 0 2px 12px rgba(108,99,255,0.08);
+    }
+    .manager-sidebar-title {
+        margin-bottom: 0;
+        margin-right: 2rem;
+    }
+    .manager-sidebar-list {
+        display: flex;
+        flex-direction: row;
+        gap: 1.2rem;
+        width: auto;
+    }
+    .manager-sidebar-list li {
+        margin-bottom: 0;
+    }
+}
+/* Auth manager supprimé : utiliser les styles auth du global/main.css */
+/* Flash messages manager supprimé : utiliser le style global/main.css */
+/* --- LISTES UTILISATEURS MANAGER --- */
+.manager-listes {
+    padding: 2rem 0 3rem 0;
+}
+.manager-listes-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #6c63ff;
+    margin-bottom: 2.5rem;
+    font-weight: bold;
+}
+.manager-listes-sections {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    justify-content: center;
+}
+.manager-listes-block {
+    background: #fff;
+    border-radius: 0.7rem;
+    box-shadow: 0 2px 8px rgba(108,99,255,0.07);
+    padding: 2rem 1.5rem 2.5rem 1.5rem;
+    flex: 1 1 320px;
+    min-width: 320px;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+    transition: box-shadow 0.2s;
+}
+.manager-listes-block h2 {
+    color: #6c63ff;
+    margin-bottom: 1.2rem;
+    font-size: 1.2rem;
+}
+.manager-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+.manager-card {
+    background: #f8f9fd;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 4px rgba(108,99,255,0.06);
+    padding: 1.2rem 1rem;
+    text-align: left;
+    transition: box-shadow 0.2s, transform 0.2s;
+    position: relative;
+}
+.manager-card:hover {
+    box-shadow: 0 4px 16px rgba(108,99,255,0.13);
+    transform: translateY(-2px) scale(1.01);
+}
+.manager-card-header {
+    font-weight: bold;
+    color: #6c63ff;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+.manager-card-title {
+    font-size: 1.1rem;
+}
+.manager-card-body p {
+    margin: 0.2rem 0;
+    font-size: 0.98rem;
+}
+.manager-empty {
+    color: #aaa;
+    font-style: italic;
+    margin: 1.5rem 0;
+}
+@media (max-width: 900px) {
+    .manager-listes-sections {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+    }
+    .manager-listes-block {
+        max-width: 95vw;
+    }
+}
+/* UrbanHome - Espace Manager */
+.manager-dashboard {
+    padding: 2rem 0 3rem 0;
+    background: #f8f9fd;
+}
+.manager-banner {
+    background: linear-gradient(120deg, #6c63ff 60%, #ffb347 100%);
+    color: #fff;
+    padding: 3rem 2rem;
+    text-align: center;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(108,99,255,0.1);
+    position: relative;
+}
+.urbanhome-logo {
+    font-weight: bold;
+    color: #ffb347;
+    letter-spacing: 1px;
+}
+.manager-sections {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+.manager-section {
+    background: #fff;
+    border-radius: 0.7rem;
+    box-shadow: 0 2px 8px rgba(108,99,255,0.07);
+    padding: 2rem 1.5rem 2.5rem 1.5rem;
+    flex: 1 1 250px;
+    min-width: 250px;
+    max-width: 350px;
+    text-align: center;
+    position: relative;
+    transition: box-shadow 0.2s;
+}
+.manager-section:hover {
+    box-shadow: 0 4px 24px rgba(108,99,255,0.13);
+    transform: translateY(-2px) scale(1.02);
+}
+.manager-section h2 {
+    color: #6c63ff;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+.btn-manager {
+    display: inline-block;
+    margin: 1.2rem 0.5rem 0 0.5rem;
+    padding: 0.7rem 1.5rem;
+    background: #6c63ff;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(108,99,255,0.08);
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.btn-manager:hover {
+    background: #ffb347;
+    color: #222;
+    box-shadow: 0 4px 16px rgba(255,179,71,0.13);
+}
+.btn-manager.btn-secondary {
+    background: #fff;
+    color: #6c63ff;
+    border: 1.5px solid #6c63ff;
+}
+.btn-manager.btn-secondary:hover {
+    background: #6c63ff;
+    color: #fff;
+}
+@media (max-width: 900px) {
+    .manager-sections {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+    }
+    .manager-section {
+        max-width: 95vw;
+    }
+}

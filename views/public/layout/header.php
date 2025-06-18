@@ -7,6 +7,10 @@
     <title><?= isset($title) ? htmlspecialchars($title) : 'UrbanHome' ?></title>
     <link rel="stylesheet" href="<?= ASSET_PATH ?>css/main.css">
     <link rel="stylesheet" href="<?= ASSET_PATH ?>css/home.css">
+    <link rel="stylesheet" href="<?= ASSET_PATH ?>css/client.css">
+    <link rel="stylesheet" href="<?=ASSET_PATH?>css/bailleur.css">
+    <link rel="stylesheet" href="<?=ASSET_PATH?>css/manager.css">
+    <link rel="stylesheet" href="<?ASSET_PATH?>css/agent.css">
     <link rel="icon" href="<?= ASSET_PATH ?>images/flavicon.png" type="image/x-icon">
     <script src="<?= ASSET_PATH ?>js/main.js" defer></script>
 </head>

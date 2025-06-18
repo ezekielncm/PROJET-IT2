@@ -1,0 +1,173 @@
+/* Tous les styles navbar non .agent- supprimés. Seuls les styles strictement préfixés .agent- sont conservés. */
+/* === Dashboard Agent UrbanHome === */
+.agent-dashboard-container {
+    padding: 2.5rem 1rem 3rem 1rem;
+    background: #f8f9fd;
+    min-height: 80vh;
+}
+.agent-dashboard-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+.agent-dashboard-title {
+    color: #2563eb;
+    font-size: 2.1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+.agent-dashboard-subtitle {
+    color: #444;
+    font-size: 1.1rem;
+}
+.agent-flash-message {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    background: #22c55e;
+    color: #fff;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(108,99,255,0.13);
+    font-size: 1.08rem;
+    font-weight: 500;
+    z-index: 1200;
+    animation: agent-fade-in-out 5s ease-in-out forwards;
+}
+.agent-flash-success { background: #22c55e; }
+.agent-flash-error { background: #ef4444; }
+@keyframes agent-fade-in-out {
+    0% { opacity: 0; transform: translateY(-10px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); }
+}
+.agent-dashboard-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+}
+.agent-dashboard-card {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(108,99,255,0.07);
+    padding: 2rem 1.5rem 2.5rem 1.5rem;
+    min-width: 220px;
+    max-width: 320px;
+    text-align: center;
+    flex: 1 1 220px;
+    transition: box-shadow 0.2s;
+}
+.agent-dashboard-card h3 {
+    color: #2563eb;
+    margin-bottom: 1.2rem;
+    font-size: 1.1rem;
+}
+.agent-dashboard-card p {
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin: 0;
+}
+.agent-dashboard-card-red h3 { color: #dc2626; }
+.agent-dashboard-card-red p { color: #dc2626; }
+.agent-dashboard-card-blue h3 { color: #2563eb; }
+.agent-dashboard-card-blue p { color: #2563eb; }
+.agent-dashboard-card-green h3 { color: #16a34a; }
+.agent-dashboard-card-green p { color: #16a34a; }
+.agent-dashboard-actions {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(108,99,255,0.07);
+    padding: 2rem 1.5rem 2.5rem 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+.agent-dashboard-actions h2 {
+    color: #2563eb;
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+}
+.agent-dashboard-actions-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+.agent-btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(108,99,255,0.08);
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.agent-btn-yellow { background: #eab308; }
+.agent-btn-yellow:hover { background: #ca8a04; }
+.agent-btn-blue { background: #2563eb; }
+.agent-btn-blue:hover { background: #1d4ed8; }
+.agent-btn-green { background: #16a34a; }
+.agent-btn-green:hover { background: #15803d; }
+.agent-btn-gray { background: #6b7280; }
+.agent-btn-gray:hover { background: #374151; }
+.agent-dashboard-warning {
+    color: #dc2626;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+/* Erreur */
+.agent-error-container {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fd;
+}
+.agent-error-box {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 2px 16px rgba(108,99,255,0.10);
+    padding: 2.5rem 2rem 2rem 2rem;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+.agent-error-title {
+    color: #dc2626;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+.agent-error-text {
+    color: #444;
+    font-size: 1.1rem;
+    margin-bottom: 1.2rem;
+}
+.agent-error-link {
+    color: #2563eb;
+    text-decoration: underline;
+    font-weight: 500;
+    font-size: 1rem;
+}
+.agent-error-link:hover {
+    color: #1d4ed8;
+}
+@media (max-width: 900px) {
+    .agent-dashboard-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+    }
+    .agent-dashboard-card {
+        max-width: 95vw;
+    }
+    .agent-dashboard-actions-list {
+        flex-direction: column;
+        gap: 0.7rem;
+    }
+}
+/* Tous les styles génériques supprimés. Seuls les styles préfixés .agent- sont conservés pour éviter tout conflit. */
