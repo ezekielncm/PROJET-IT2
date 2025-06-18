@@ -229,7 +229,7 @@ class ManagerControllers extends Controllers {
         $total = $this->managerBDD->countProprietes();
         $totalPages = ceil($total / $limit);
 
-        $this->render('propriete/liste', [
+        $this->render('manager/propriete/liste', [
             'proprietes' => $proprietes,
             'page' => $page,
             'totalPages' => $totalPages
@@ -267,7 +267,7 @@ class ManagerControllers extends Controllers {
         $clients = $this->managerBDD->getClients($limit, $offset);
         $total = $this->managerBDD->countClients();
         $totalPages = ceil($total / $limit);
-        $this->render('manager/client/list', [
+        $this->render('manager/client/liste', [
             'clients' => $clients,
             'page' => $page,
             'totalPages' => $totalPages

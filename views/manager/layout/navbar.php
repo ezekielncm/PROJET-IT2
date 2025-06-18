@@ -8,10 +8,10 @@
     </div>
     <ul class="side-navbar-list">
         <li><a href="/manager/accueil">Tableau de bord</a></li>
-        <li><a href="/manager/users">Utilisateurs</a></li>
-        <li><a href="/manager/properties">Propriétés</a></li>
-        <li><a href="/manager/contracts">Contrats</a></li>
-        <li><a href="/manager/payments">Paiements</a></li>
+        <li><a href="/manager/clients">Utilisateurs</a></li>
+        <li><a href="/manager/proprietes">Propriétés</a></li>
+        <li><a href="/manager/contrats">Contrats</a></li>
+        <li><a href="/manager/paiments">Paiements</a></li>
         <li><a href="/manager/profile">Profil</a></li>
         <li><a href="/manager/logout" style="color:#c00;">Déconnexion</a></li>
     </ul>

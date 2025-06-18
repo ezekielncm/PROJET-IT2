@@ -47,6 +47,9 @@ class Router {
         '/manager/contrats' => ['controllers\ManagerControllers', 'listContrats'],
         '/manager/paiements' => ['controllers\ManagerControllers', 'listPaiements'],
         '/manager/messages' => ['controllers\ManagerControllers', 'listMessages'],
+
+        //agent routes
+        '/agent' => ['controllers\AgentControllers', 'login_Agent'],
     ];
 
     public function register(string $path, callable|array $action): void {

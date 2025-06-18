@@ -366,3 +366,279 @@
         max-width: 95vw;
     }
 }
+
+/* === Propriétés - Liste Manager === */
+.manager-main-content {
+    padding: 2.5rem 1.5rem 3rem 1.5rem;
+    background: #f8f9fd;
+    min-height: 80vh;
+}
+.manager-section-proprietes {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+.manager-title {
+    font-size: 2rem;
+    color: #6c63ff;
+    font-weight: bold;
+    margin-bottom: 2.2rem;
+    text-align: center;
+    letter-spacing: 1px;
+}
+.manager-grid-proprietes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+.manager-card-propriete {
+    background: #fff;
+    border-radius: 1.2rem;
+    box-shadow: 0 2px 16px rgba(108,99,255,0.10);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+.manager-card-propriete:hover {
+    box-shadow: 0 6px 32px rgba(108,99,255,0.18);
+    transform: translateY(-2px) scale(1.01);
+}
+.manager-card-img-wrapper {
+    width: 100%;
+    height: 210px;
+    background: #f5f5fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.manager-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.manager-card-body {
+    padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.manager-card-price {
+    color: #6c63ff;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+}
+.manager-card-desc {
+    color: #444;
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+}
+.manager-card-info {
+    color: #888;
+    font-size: 0.98rem;
+    margin-bottom: 0.1rem;
+}
+.manager-card-info span {
+    color: #222;
+    font-weight: 500;
+}
+.manager-btn {
+    display: inline-block;
+    background: #6c63ff;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 0.7rem;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(108,99,255,0.08);
+    cursor: pointer;
+}
+.manager-btn-primary {
+    background: #6c63ff;
+    color: #fff;
+}
+.manager-btn-primary:hover {
+    background: #ffb347;
+    color: #222;
+}
+
+/* Pagination */
+.manager-pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 2.5rem 0 1.5rem 0;
+}
+.manager-pagination {
+    display: inline-flex;
+    box-shadow: 0 2px 8px rgba(108,99,255,0.07);
+    border-radius: 0.7rem;
+    overflow: hidden;
+    background: #fff;
+}
+.manager-pagination-btn {
+    padding: 0.7rem 1.3rem;
+    font-size: 1rem;
+    color: #6c63ff;
+    background: #fff;
+    border: none;
+    border-right: 1px solid #ececec;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.manager-pagination-btn:last-child {
+    border-right: none;
+}
+.manager-pagination-btn:hover {
+    background: #f5f5fa;
+    color: #ffb347;
+}
+.manager-pagination-active {
+    background: #6c63ff !important;
+    color: #fff !important;
+    font-weight: bold;
+}
+.manager-pagination-disabled {
+    background: #f5f5fa;
+    color: #bbb;
+    cursor: not-allowed;
+}
+.manager-pagination-prev, .manager-pagination-next {
+    font-weight: 600;
+}
+@media (max-width: 700px) {
+    .manager-main-content {
+        padding: 1.2rem 0.2rem 2rem 0.2rem;
+    }
+    .manager-section-proprietes {
+        padding: 0 0.2rem;
+    }
+    .manager-grid-proprietes {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    .manager-card-img-wrapper {
+        height: 160px;
+    }
+}
+
+/* === Détail propriété Manager === */
+.manager-detail-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 3rem 1.5rem;
+    background: #f8f9fd;
+    min-height: 80vh;
+}
+.manager-detail-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 2.5rem;
+    background: #fff;
+    border-radius: 1.2rem;
+    box-shadow: 0 2px 16px rgba(108,99,255,0.10);
+    padding: 2.2rem 2rem;
+    margin-bottom: 2.5rem;
+    align-items: stretch;
+}
+.manager-detail-gallery {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.2rem;
+}
+.manager-detail-gallery-main {
+    grid-column: 1 / 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.manager-detail-img-main {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(108,99,255,0.08);
+    background: #f5f5fa;
+}
+.manager-detail-gallery-side {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    justify-content: flex-start;
+}
+.manager-detail-img-side {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 0.8rem;
+    box-shadow: 0 1px 4px rgba(108,99,255,0.06);
+    background: #f5f5fa;
+}
+.manager-detail-infos {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2.2rem;
+}
+.manager-detail-desc {
+    color: #444;
+    font-size: 1.08rem;
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+}
+.manager-detail-desc strong {
+    color: #6c63ff;
+    font-weight: 600;
+}
+.manager-detail-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.1rem;
+    margin-top: 1.2rem;
+}
+.manager-btn-danger {
+    background: #c0392b;
+    color: #fff;
+}
+.manager-btn-danger:hover {
+    background: #ffb347;
+    color: #222;
+}
+.manager-btn-success {
+    background: #27ae60;
+    color: #fff;
+}
+.manager-btn-success:hover {
+    background: #6c63ff;
+    color: #fff;
+}
+@media (max-width: 900px) {
+    .manager-detail-grid {
+        grid-template-columns: 1fr;
+        padding: 1.2rem 0.5rem;
+        gap: 1.5rem;
+    }
+    .manager-detail-gallery {
+        grid-template-columns: 1fr;
+        gap: 0.7rem;
+    }
+    .manager-detail-img-main {
+        height: 200px;
+    }
+    .manager-detail-img-side {
+        height: 90px;
+    }
+}
