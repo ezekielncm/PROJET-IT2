@@ -1,0 +1,211 @@
+/* UrbanHome - Page Contact Public */
+.public-contact-main {
+    min-height: 80vh;
+    background: #f8f9fd;
+    padding: 2.5rem 1rem 3rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.public-contact-section {
+    background: #fff;
+    border-radius: 1.2rem;
+    box-shadow: 0 2px 16px rgba(108,99,255,0.10);
+    max-width: 480px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.public-contact-title {
+    color: #6c63ff;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.2rem;
+    text-align: center;
+}
+.public-contact-desc {
+    color: #444;
+    font-size: 1.08rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+.public-contact-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+.public-contact-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+.public-contact-form-group label {
+    font-weight: 500;
+    color: #444;
+}
+.public-contact-form-group input,
+.public-contact-form-group textarea {
+    padding: 0.8rem 1rem;
+    border: 1.5px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    background: #f5f5fa;
+    transition: border 0.2s;
+    resize: none;
+}
+.public-contact-form-group input:focus,
+.public-contact-form-group textarea:focus {
+    border: 1.5px solid #6c63ff;
+    outline: none;
+    background: #fff;
+}
+.public-contact-btn {
+    background: #6c63ff;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.9rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(108,99,255,0.08);
+    transition: background 0.2s, color 0.2s;
+}
+.public-contact-btn:hover {
+    background: #ffb347;
+    color: #222;
+}
+/* Flash message contact */
+.public-contact-flash {
+    width: 100%;
+    margin-bottom: 1.2rem;
+    padding: 1rem 1.2rem;
+    border-radius: 0.7rem;
+    font-size: 1.08rem;
+    font-weight: 500;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(108,99,255,0.08);
+    animation: fadeIn 0.7s;
+}
+.public-contact-flash.success {
+    background: #eafbe7;
+    color: #27ae60;
+    border: 1.5px solid #27ae60;
+}
+.public-contact-flash.error {
+    background: #fff0f0;
+    color: #c0392b;
+    border: 1.5px solid #c0392b;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 600px) {
+    .public-contact-section {
+        padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+    }
+    .public-contact-title {
+        font-size: 1.3rem;
+    }
+}
+/* === À propos UrbanHome === */
+.public-about-main {
+    min-height: 80vh;
+    background: #f8f9fd;
+    padding: 2.5rem 1rem 3rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.public-about-section {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 1.2rem;
+    box-shadow: 0 2px 16px rgba(108,99,255,0.10);
+    padding: 2.5rem 2rem 2rem 2rem;
+}
+.public-about-header {
+    text-align: center;
+    margin-bottom: 2.2rem;
+}
+.public-about-title {
+    color: #6c63ff;
+    font-size: 2.3rem;
+    font-weight: bold;
+    margin-bottom: 0.7rem;
+}
+.public-about-subtitle {
+    color: #444;
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+}
+.public-about-content {
+    background: rgba(255,255,255,0.92);
+    border-radius: 1rem;
+    padding: 2rem 1.2rem 1.2rem 1.2rem;
+    box-shadow: 0 2px 8px rgba(108,99,255,0.07);
+}
+.public-about-heading {
+    color: #6c63ff;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 0.7rem;
+    margin-top: 1.5rem;
+}
+.public-about-text {
+    color: #444;
+    font-size: 1.08rem;
+    margin-bottom: 1.2rem;
+}
+.public-about-list {
+    color: #444;
+    font-size: 1.08rem;
+    margin-bottom: 1.2rem;
+    padding-left: 1.2rem;
+    list-style: disc inside;
+}
+.public-about-list li {
+    margin-bottom: 0.3rem;
+}
+.public-about-cta {
+    color: #6c63ff;
+    font-size: 1.15rem;
+    margin-top: 2.2rem;
+    text-align: center;
+    font-weight: 600;
+}
+/* Métadonnées version/année - À propos */
+.public-about-meta {
+    margin-top: 2.2rem;
+    text-align: center;
+    color: #888;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+.public-about-meta-version {
+    font-weight: 500;
+}
+.public-about-meta-date {
+    font-style: italic;
+}
+@media (max-width: 700px) {
+    .public-about-section {
+        padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+    }
+    .public-about-title {
+        font-size: 1.4rem;
+    }
+    .public-about-content {
+        padding: 1rem 0.2rem 0.7rem 0.2rem;
+    }
+}

@@ -95,10 +95,38 @@ class HomeControllers extends Controllers{
         $this->render('bailleur/auth/inscription');
     }
     public function about() {
-        $this->render('public/about');
+        // Possibilité d'ajouter des données dynamiques à la page à propos
+        $infos = [
+            'version' => '1.0',
+            'date' => date('Y'),
+            // Ajoutez ici d'autres infos si besoin
+        ];
+        $this->render('public/about', $infos);
     }
+
     public function contact() {
-        $this->render('public/contact');
+        $flash = null;
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $nom = trim($_POST['nom'] ?? '');
+            $email = trim($_POST['email'] ?? '');
+            $message = trim($_POST['message'] ?? '');
+            if ($nom && $email && $message && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                // Ici, vous pouvez ajouter l'envoi d'email ou l'enregistrement en BDD
+                $flash = [
+                    'type' => 'success',
+                    'msg' => 'Votre message a bien été envoyé. Nous vous répondrons rapidement !'
+                ];
+            } else {
+                $flash = [
+                    'type' => 'error',
+                    'msg' => 'Merci de remplir tous les champs correctement.'
+                ];
+            }
+        }
+        $this->render('public/contact', [
+            'flash' => $flash,
+            'old' => $_POST ?? []
+        ]);
     }
 public function listes_prorpietes_home() {
 

@@ -16,7 +16,7 @@
                 <li><a href="/connexion-agent">Espace Agent</a></li>
             </ul>
         </li>
-        <li><a href="/about">A propos de nous</a></li>
-        <li><a href="/contact">Nous Contacter</a></li>
+        <li><a href="/public/about">A propos de nous</a></li>
+        <li><a href="/public/contact">Nous Contacter</a></li>
     </ul>
 </nav>

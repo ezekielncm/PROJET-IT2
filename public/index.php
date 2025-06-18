@@ -21,7 +21,8 @@ if (php_sapi_name() === 'cli-server' && basename(__DIR__) !== 'public') {
 }
 // Pour la production, on utilise un chemin absolu sécurisé pour les vues
 define('VIEW_PATH', realpath(__DIR__ . '/../views/') . DIRECTORY_SEPARATOR);
-
+define('FOOTER_PATH', realpath(__DIR__ . '/../views/public/layout/footer.php'));
+define('HEADER_PATH', realpath(__DIR__ . '/../views/public/layout/header.php'));
 $router = new Router();
 // point d'entrée pour les routes
 $router->register('/', ['controllers\HomeControllers', 'home']);
