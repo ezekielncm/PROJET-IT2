@@ -1,6 +1,6 @@
 # UrbanHome
 
-UrbanHome est une application web de gestion immobilière moderne, développée en PHP avec une architecture MVC complète. Elle permet la gestion de biens, utilisateurs (clients, bailleurs, agents, managers), transactions, rendez-vous, messagerie et bien plus, avec une interface responsive et sécurisée.
+UrbanHome est une application web de gestion immobilière moderne, développée en PHP avec une architecture MVC complète. Elle permet la gestion de biens, utilisateurs (clients, bailleurs, agents, managers), transactions, rendez-vous, messagerie et bien plus, avec une interface responsive, accessible et sécurisée.
 
 ## 🚀 Fonctionnalités principales
 
@@ -8,14 +8,17 @@ UrbanHome est une application web de gestion immobilière moderne, développée 
 - Gestion multi-profils : client, bailleur, agent, manager
 - Authentification sécurisée, gestion des sessions, tokens CSRF
 - PHPMailer pour l'envoi d'e-mails (inscription, réinitialisation de mot de passe)
-- Interface utilisateur moderne et responsive (HTML5, CSS3, JS)
+- Interface utilisateur moderne, responsive et accessible (HTML5, CSS3, JS)
+- Séparation stricte des CSS par espace (`main.css`, `client.css`, `bailleur.css`, `manager.css`, `agent.css`, `public.css`)
+- Suppression totale de Tailwind et des styles inline, code CSS maintenable et préfixé
 - Gestion des propriétés : ajout, modification, suppression, consultation, validation
 - Tableaux de bord personnalisés selon le profil utilisateur
 - Système de messagerie interne (clients ↔ bailleurs, clients ↔ agents)
 - Gestion des rendez-vous, favoris, achats, paiements
 - Pages d'erreur personnalisées (404, 500)
 - Sécurité renforcée : redirection HTTPS, validation des entrées, gestion des droits d'accès
-- Rafraîchissement automatique, menu responsive, gestion du burger menu
+- Rafraîchissement automatique, menu responsive, gestion du drawer/burger menu
+- Expérience utilisateur améliorée : flash messages animés, formulaires accessibles, pagination, cards, responsive, cohérence visuelle UrbanHome
 
 ## 🛠️ Installation rapide
 
@@ -62,6 +65,8 @@ UrbanHome est une application web de gestion immobilière moderne, développée 
 - `config/` : configuration (connexion PDO, chargement .env)
 - `routes/` : gestion des routes (`Router.php`)
 - `public/assets/` : ressources statiques (CSS, JS, images)
+    - `css/` : fichiers CSS séparés par espace (`main.css`, `client.css`, `bailleur.css`, `manager.css`, `agent.css`, `public.css`)
+    - `js/` : scripts dédiés (ex : animation flash messages)
 - `src/` : initialisation de l'application (App.php)
 
 ## 🌐 Exemples de routes principales
@@ -124,20 +129,24 @@ UrbanHome est une application web de gestion immobilière moderne, développée 
 ## ✨ Fonctionnalités avancées
 
 - Gestion avancée des propriétés (CRUD, validation, affectation)
-- Messages flash pour les retours utilisateur
-- Formulaires dynamiques pour chaque profil
+- Messages flash animés et accessibles pour les retours utilisateur
+- Formulaires dynamiques et accessibles pour chaque profil
 - Tableaux de bord interactifs avec indicateurs clés (KPI)
 - Système de messagerie interne multi-profils
 - Gestion des rendez-vous et notifications
 - Sécurité : CSRF, HTTPS, validation, gestion des droits
-- Rafraîchissement automatique, menu responsive, burger menu JS
+- Rafraîchissement automatique, menu responsive, drawer/burger menu JS
+- Accessibilité renforcée (contrastes, navigation clavier, ARIA)
 
-## 💡 Conseils d'utilisation
+## 💡 Conseils d'utilisation & contribution
 
 - Adaptez les fichiers de configuration à votre environnement (BDD, mail, etc.)
 - Pour la production, configurez votre serveur pour que seul le dossier `public/` soit accessible publiquement
 - Personnalisez les pages d'erreur dans `views/error/`
+- Séparez vos styles CSS par espace pour une meilleure maintenabilité
+- Utilisez les classes préfixées (`.client-`, `.bailleur-`, `.manager-`, `.agent-`, `.public-`) pour éviter les conflits
 - Pensez à sécuriser vos accès et à mettre à jour vos dépendances
+- Pour contribuer, ouvrez une issue ou une pull request sur le dépôt
 
 ## 📊 Exemple de configuration `.env`
 
