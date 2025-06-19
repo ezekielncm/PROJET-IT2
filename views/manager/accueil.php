@@ -7,6 +7,14 @@
     </div>
     <div class="home-sections manager-sections">
         <div class="home-section manager-section">
+            <h2>Administration & configuration</h2>
+            <p>Gérez les agents, bailleurs et configurez les paramètres globaux de la plateforme.</p>
+            <a href="/manager/agents" class="btn-manager">Voir les agents</a>
+            <a href="/manager/bailleurs" class="btn-manager">Voir les bailleurs</a>
+        </div>
+    </div>
+    <div class="home-sections manager-sections">
+        <div class="home-section manager-section">
             <h2>Gestion des clients</h2>
             <p>Consultez, assignez et gérez les comptes clients.</p>
             <a href="/manager/clients" class="btn-manager">Voir les clients</a>

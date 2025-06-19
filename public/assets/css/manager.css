@@ -1,3 +1,110 @@
+/* UrbanHome - Styles pour la gestion des bailleurs (liste, voir, ajouter, editer) */
+.bailleurs-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    background: rgba(255,255,255,0.85);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 2rem 2.5rem;
+}
+.titre-page {
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: #1a365d;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.flash-success, .flash-error {
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.2rem;
+    font-weight: 500;
+    text-align: center;
+}
+.flash-success { background: #e6fffa; color: #276749; border: 1px solid #38b2ac; }
+.flash-error { background: #fff5f5; color: #c53030; border: 1px solid #feb2b2; }
+.bailleurs-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+.bailleur-card {
+    background: rgba(255,255,255,0.95);
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(26,54,93,0.07);
+    padding: 1.2rem 1.5rem;
+    min-width: 260px;
+    max-width: 320px;
+    flex: 1 1 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: box-shadow 0.2s;
+}
+.bailleur-card:hover {
+    box-shadow: 0 6px 24px rgba(26,54,93,0.13);
+}
+.bailleur-info h2 {
+    font-size: 1.2rem;
+    color: #234e70;
+    margin-bottom: 0.5rem;
+}
+.bailleur-info p {
+    margin: 0.2rem 0;
+    color: #3a506b;
+    font-size: 1rem;
+}
+.bailleur-actions {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+.btn {
+    padding: 0.5rem 1.1rem;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+    outline: none;
+}
+.btn-view { background: #e2e8f0; color: #234e70; }
+.btn-edit { background: #bee3f8; color: #234e70; }
+.btn-delete { background: #feb2b2; color: #c53030; }
+.btn-add { background: #38b2ac; color: #fff; margin-top: 1.5rem; display: inline-block; }
+.btn-back { background: #e2e8f0; color: #234e70; margin-top: 1.5rem; display: inline-block; }
+.btn:hover, .btn:focus { filter: brightness(0.95); }
+.pagination {
+    margin: 2rem 0 1rem 0;
+    text-align: center;
+}
+.page-link {
+    display: inline-block;
+    margin: 0 0.2rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 5px;
+    background: #f7fafc;
+    color: #234e70;
+    text-decoration: none;
+    font-weight: 500;
+    border: 1px solid #e2e8f0;
+    transition: background 0.15s, color 0.15s;
+}
+.page-link.active, .page-link:hover {
+    background: #38b2ac;
+    color: #fff;
+    border-color: #38b2ac;
+}
+/* Responsive */
+@media (max-width: 700px) {
+    .bailleurs-container { padding: 1rem 0.3rem; }
+    .bailleurs-list { flex-direction: column; gap: 1rem; }
+    .bailleur-card { max-width: 100%; min-width: 0; }
+}
 /* === Connexion & Inscription Manager === */
 .manager-auth-container {
     min-height: 80vh;
@@ -306,21 +413,31 @@
     gap: 2rem;
     justify-content: center;
 }
+/* --- Amélioration visuelle UrbanHome --- */
 .manager-section {
-    background: #fff;
-    border-radius: 0.7rem;
-    box-shadow: 0 2px 8px rgba(108,99,255,0.07);
-    padding: 2rem 1.5rem 2.5rem 1.5rem;
-    flex: 1 1 250px;
+    background: rgba(255,255,255,0.85);
+    border-radius: 1.1rem;
+    box-shadow: 0 8px 32px rgba(108,99,255,0.10), 0 1.5px 8px rgba(255,179,71,0.07);
+    padding: 2.2rem 1.7rem 2.7rem 1.7rem;
+    flex: 1 1 270px;
     min-width: 250px;
-    max-width: 350px;
+    max-width: 370px;
     text-align: center;
     position: relative;
-    transition: box-shadow 0.2s;
+    transition: box-shadow 0.25s, transform 0.25s, background 0.25s;
+    -webkit-backdrop-filter: blur(2.5px);
+    backdrop-filter: blur(2.5px);
+    animation: managerFadeIn 0.7s cubic-bezier(.4,0,.2,1);
 }
 .manager-section:hover {
-    box-shadow: 0 4px 24px rgba(108,99,255,0.13);
-    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 48px 0 rgba(108,99,255,0.18), 0 2px 16px rgba(255,179,71,0.13);
+    transform: translateY(-6px) scale(1.035);
+    background: rgba(255,255,255,0.97);
+}
+
+@keyframes managerFadeIn {
+    from { opacity: 0; transform: translateY(30px) scale(0.98); }
+    to   { opacity: 1; transform: none; }
 }
 .manager-section h2 {
     color: #6c63ff;
@@ -330,31 +447,35 @@
 .btn-manager {
     display: inline-block;
     margin: 1.2rem 0.5rem 0 0.5rem;
-    padding: 0.7rem 1.5rem;
-    background: #6c63ff;
+    padding: 0.8rem 1.7rem;
+    background: linear-gradient(90deg, #6c63ff 70%, #ffb347 100%);
     color: #fff;
     border: none;
-    border-radius: 0.5rem;
-    font-weight: 600;
-    font-size: 1rem;
-    box-shadow: 0 2px 8px rgba(108,99,255,0.08);
+    border-radius: 0.7rem;
+    font-weight: 700;
+    font-size: 1.08rem;
+    box-shadow: 0 2px 12px rgba(108,99,255,0.10);
     cursor: pointer;
     text-decoration: none;
-    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.5px;
+    transition: background 0.22s, color 0.22s, box-shadow 0.22s, transform 0.18s;
 }
 .btn-manager:hover {
-    background: #ffb347;
+    background: linear-gradient(90deg, #ffb347 60%, #6c63ff 100%);
     color: #222;
-    box-shadow: 0 4px 16px rgba(255,179,71,0.13);
+    box-shadow: 0 6px 24px rgba(255,179,71,0.18);
+    transform: scale(1.04);
 }
 .btn-manager.btn-secondary {
     background: #fff;
     color: #6c63ff;
-    border: 1.5px solid #6c63ff;
+    border: 2px solid #6c63ff;
+    font-weight: 600;
 }
 .btn-manager.btn-secondary:hover {
     background: #6c63ff;
     color: #fff;
+    border-color: #ffb347;
 }
 @media (max-width: 900px) {
     .manager-sections {
@@ -640,5 +761,148 @@
     }
     .manager-detail-img-side {
         height: 90px;
+    }
+}
+
+/* === Liste des agents UrbanHome === */
+.manager-list-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 3rem 1.5rem;
+    background: #f8f9fd;
+    min-height: 80vh;
+}
+.manager-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.manager-list-header h1 {
+    color: #6c63ff;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+}
+.manager-card-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+.manager-card {
+    background: #fff;
+    border-radius: 0.7rem;
+    box-shadow: 0 2px 8px rgba(108,99,255,0.10);
+    padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 180px;
+}
+.manager-card:hover {
+    box-shadow: 0 6px 24px rgba(108,99,255,0.13);
+    transform: translateY(-2px) scale(1.01);
+}
+.manager-card-title {
+    font-size: 1.2rem;
+    color: #6c63ff;
+    font-weight: bold;
+    margin-bottom: 0.7rem;
+}
+.manager-card-details {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.7rem 0;
+    color: #444;
+    font-size: 1.04rem;
+}
+.manager-card-details li {
+    margin-bottom: 0.2rem;
+}
+.manager-label {
+    color: #888;
+    font-weight: 500;
+    margin-right: 0.3rem;
+}
+.manager-card-actions {
+    display: flex;
+    gap: 0.7rem;
+    margin-top: auto;
+    flex-wrap: wrap;
+}
+.manager-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    background: #6c63ff;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(108,99,255,0.08);
+    cursor: pointer;
+}
+.manager-btn-primary {
+    background: #6c63ff;
+    color: #fff;
+}
+.manager-btn-primary:hover {
+    background: #ffb347;
+    color: #222;
+}
+.manager-btn-warning {
+    background: #ffb347;
+    color: #222;
+}
+.manager-btn-warning:hover {
+    background: #6c63ff;
+    color: #fff;
+}
+.manager-btn-danger {
+    background: #c0392b;
+    color: #fff;
+}
+.manager-btn-danger:hover {
+    background: #ffb347;
+    color: #222;
+}
+.manager-btn-success {
+    background: #27ae60;
+    color: #fff;
+}
+.manager-btn-success:hover {
+    background: #6c63ff;
+    color: #fff;
+}
+.manager-inline-form {
+    display: inline;
+}
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+@media (max-width: 900px) {
+    .manager-list-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.7rem;
+    }
+    .manager-card-list {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
     }
 }

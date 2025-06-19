@@ -1,19 +1,23 @@
 <?php
 namespace controllers;
-
 use controllers\Controllers;
 use model\Manager;
 use model\ManagerBDD;
 
-class ManagerControllers extends Controllers {
+class ManagerControllers extends Controllers
+{
+
+
     private $managerBDD;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->managerBDD = new ManagerBDD();
     }
 
     // Ajouter un manager via POST
-    public function addManager() {
+    public function addManager()
+    {
         if (isset($_SESSION['id_manager'])) {
             // Si déjà connecté, rediriger vers tableau de bord
             $this->render("manager/accueil");
@@ -60,7 +64,8 @@ class ManagerControllers extends Controllers {
     }
 
     // Connexion manager via POST
-    public function loginManager() {
+    public function loginManager()
+    {
         if (isset($_SESSION['id_manager'])) {
             // Si déjà connecté, rediriger vers tableau de bord
             $this->render("manager/accueil");
@@ -105,14 +110,16 @@ class ManagerControllers extends Controllers {
     }
 
     // Déconnexion manager
-    public function logoutManager() {
+    public function logoutManager()
+    {
         unset($_SESSION['id_manager']);
         $this->render('manager/auth/connexion', ['msg' => "Vous avez été déconnecté avec succès."]);
         exit;
     }
 
     // Récupérer manager par ID via GET
-    public function getManagerById($id) {
+    public function getManagerById($id)
+    {
         $managers = $this->managerBDD->getManagerById((int)$id);
         if (count($managers) > 0) {
             $manager = $managers[0]['objet'];
@@ -123,7 +130,8 @@ class ManagerControllers extends Controllers {
     }
 
     // Supprimer un client via POST
-    public function deleteClient() {
+    public function supprimerClient()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = intval($_POST['id'] ?? 0);
             if ($id > 0) {
@@ -135,14 +143,15 @@ class ManagerControllers extends Controllers {
             } else {
                 $_SESSION['error'] = "ID client invalide.";
             }
-            $this->render('manager/client/list');
+            $this->render('manager/client/liste');
             exit;
         }
         $this->render('error/404');
     }
 
     // Supprimer un bailleur via POST
-    public function deleteBailleur() {
+    public function supprimerBailleur()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = intval($_POST['id'] ?? 0);
             if ($id > 0) {
@@ -154,18 +163,19 @@ class ManagerControllers extends Controllers {
             } else {
                 $_SESSION['error'] = "ID bailleur invalide.";
             }
-            $this->render('manager/bailleur/list');
+            $this->render('manager/bailleur/liste');
             exit;
         }
         $this->render('error/404');
     }
 
     // Supprimer un agent via POST
-    public function deleteAgent() {
+    public function supprimerAgent()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $id = intval($_POST['id'] ?? 0);
-            if ($id > 0) {
-                if ($this->managerBDD->supprimerAgent($id)) {
+            $id_agent = intval($_POST['id_agent'] ?? 0);
+            if ($id_agent > 0) {
+                if ($this->managerBDD->supprimerAgent($id_agent)) {
                     $_SESSION['success'] = "Agent supprimé avec succès.";
                 } else {
                     $_SESSION['error'] = "Erreur lors de la suppression de l'agent.";
@@ -173,54 +183,56 @@ class ManagerControllers extends Controllers {
             } else {
                 $_SESSION['error'] = "ID agent invalide.";
             }
-            $this->render('manager/agent/list');
+            $this->render('manager/agent/liste');
             exit;
         }
         $this->render('error/404');
     }
 
     // Ajouter un agent via POST
-    public function addAgent() {
+    public function ajouterAgent()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nom = htmlspecialchars(trim($_POST['nom'] ?? ''));
             $prenom = htmlspecialchars(trim($_POST['prenom'] ?? ''));
-            $email = htmlspecialchars(trim($_POST['email'] ?? ''));
+            $username = htmlspecialchars(trim($_POST['username'] ?? ''));
             $telephone = htmlspecialchars(trim($_POST['telephone'] ?? ''));
             $password = htmlspecialchars(trim($_POST['password'] ?? ''));
             $confirmPassword = htmlspecialchars(trim($_POST['password_confirm'] ?? ''));
 
-            if (!$nom || !$prenom || !$email || !$telephone || !$password || !$confirmPassword) {
+            if (!$nom || !$prenom || !$username || !$telephone || !$password || !$confirmPassword) {
                 $_SESSION['error'] = "Tous les champs sont requis.";
-                $this->render('manager/agent/add', ['error' => $_SESSION['error']]);
+                $this->render('manager/agent/ajouter', ['error' => $_SESSION['error']]);
                 exit;
             }
 
             if ($password !== $confirmPassword) {
                 $_SESSION['error'] = "Les mots de passe ne correspondent pas.";
-                $this->render('manager/agent/add', ['error' => $_SESSION['error']]);
+                $this->render('manager/agent/ajouter', ['error' => $_SESSION['error']]);
                 exit;
             }
 
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-            $agent = new \model\Agent($nom, $prenom, $email, $telephone, $hashedPassword);
+            $agent = new \model\Agent($nom, $prenom, $username, $telephone, $hashedPassword);
 
             if ($this->managerBDD->addAgent($agent)) {
                 $_SESSION['success'] = "Agent ajouté avec succès.";
-                $this->render('manager/agent/list', ['success' => $_SESSION['success']]);
+                $this->render('manager/agent/liste', ['success' => $_SESSION['success']]);
                 exit;
             } else {
                 $_SESSION['error'] = "Erreur lors de l'ajout de l'agent.";
-                $this->render('manager/agent/add', ['error' => $_SESSION['error']]);
+                $this->render('manager/agent/ajouter', ['error' => $_SESSION['error']]);
                 exit;
             }
         } else {
-            $this->render('manager/agent/add');
+            $this->render('manager/agent/ajouter');
         }
     }
 
     // Lister les propriétés avec pagination
-    public function listProprietes() {
+    public function listProprietes()
+    {
         $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
         $limit = 10;
         $offset = ($page - 1) * $limit;
@@ -235,14 +247,15 @@ class ManagerControllers extends Controllers {
             'totalPages' => $totalPages
         ]);
     }
-        // Dashboard/statistiques manager
-    public function dashboard() {
+    // Dashboard/statistiques manager
+    public function dashboard()
+    {
         $this->requireManagerAuth();
         $nb_clients = $this->managerBDD->countClients();
         $nb_bailleurs = $this->managerBDD->countBailleurs();
         $nb_agents = $this->managerBDD->countAgents();
         $nb_proprietes = $this->managerBDD->countProprietes();
-        $this->render('manager/accueil', [
+        $this->render('manager/dash', [
             'nb_clients' => $nb_clients,
             'nb_bailleurs' => $nb_bailleurs,
             'nb_agents' => $nb_agents,
@@ -251,7 +264,8 @@ class ManagerControllers extends Controllers {
     }
 
     // Sécurisation accès manager
-    private function requireManagerAuth() {
+    private function requireManagerAuth()
+    {
         if (empty($_SESSION['id_manager'])) {
             header('Location: /manager');
             exit;
@@ -259,7 +273,8 @@ class ManagerControllers extends Controllers {
     }
 
     // Lister tous les clients
-    public function listClients() {
+    public function listClients()
+    {
         $this->requireManagerAuth();
         $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
         $limit = 10;
@@ -275,7 +290,8 @@ class ManagerControllers extends Controllers {
     }
 
     // Lister tous les bailleurs
-    public function listBailleurs() {
+    public function listBailleurs()
+    {
         $this->requireManagerAuth();
         $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
         $limit = 10;
@@ -283,7 +299,7 @@ class ManagerControllers extends Controllers {
         $bailleurs = $this->managerBDD->getBailleurs($limit, $offset);
         $total = $this->managerBDD->countBailleurs();
         $totalPages = ceil($total / $limit);
-        $this->render('manager/bailleur/list', [
+        $this->render('manager/bailleur/liste', [
             'bailleurs' => $bailleurs,
             'page' => $page,
             'totalPages' => $totalPages
@@ -291,7 +307,8 @@ class ManagerControllers extends Controllers {
     }
 
     // Lister tous les agents
-    public function listAgents() {
+    public function listAgents()
+    {
         $this->requireManagerAuth();
         $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
         $limit = 10;
@@ -299,7 +316,7 @@ class ManagerControllers extends Controllers {
         $agents = $this->managerBDD->getAgents($limit, $offset);
         $total = $this->managerBDD->countAgents();
         $totalPages = ceil($total / $limit);
-        $this->render('manager/agent/list', [
+        $this->render('manager/agent/liste', [
             'agents' => $agents,
             'page' => $page,
             'totalPages' => $totalPages
@@ -307,7 +324,8 @@ class ManagerControllers extends Controllers {
     }
 
     // Voir/éditer son propre profil
-    public function monProfil() {
+    public function Profile()
+    {
         $this->requireManagerAuth();
         $id = $_SESSION['id_manager'];
         $managers = $this->managerBDD->getManagerById($id);
@@ -320,7 +338,8 @@ class ManagerControllers extends Controllers {
     }
 
     // Modifier son profil manager
-    public function updateProfil() {
+    public function updateProfile()
+    {
         $this->requireManagerAuth();
         $id = $_SESSION['id_manager'];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -343,18 +362,132 @@ class ManagerControllers extends Controllers {
     }
 
     // Lister les contrats
-    public function listContrats() {
+    public function listContrats()
+    {
         $this->requireManagerAuth();
         $contratBDD = new \model\ContratBDD();
         $contrats = $contratBDD->getAllContrats();
-        $this->render('manager/contrat/list', ['contrats' => $contrats]);
+        $this->render('manager/contrat/liste', ['contrats' => $contrats]);
     }
 
     // Lister les paiements
-    public function listPaiements() {
+    public function listPaiements()
+    {
         $this->requireManagerAuth();
         $paiementBDD = new \model\PaiementBDD();
         $paiements = $paiementBDD->getAllPaiements();
-        $this->render('manager/paiement/list', ['paiements' => $paiements]);
+        $this->render('manager/paiement/liste', ['paiements' => $paiements]);
     }
+    // Affecter ou réaffecter un client à un agent
+    public function affecterClientAgent()
+    {
+        $this->requireManagerAuth();
+        $clientId = isset($_GET['client_id']) ? (int)$_GET['client_id'] : 0;
+        $agents = $this->managerBDD->getAllAgents();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $clientId = (int)($_POST['client_id'] ?? 0);
+            $agentId = (int)($_POST['agent_id'] ?? 0);
+            if ($clientId > 0 && $agentId > 0) {
+                if ($this->managerBDD->affecterClientAAgent($clientId, $agentId)) {
+                    $_SESSION['success'] = "Client affecté à l'agent avec succès.";
+                } else {
+                    $_SESSION['error'] = "Erreur lors de l'affectation du client à l'agent.";
+                }
+                header('Location: /manager/clients');
+                exit;
+            } else {
+                $_SESSION['error'] = "Client ou agent invalide.";
+            }
+        }
+        // Récupérer le client à affecter si besoin pour affichage
+        $client = null;
+        if ($clientId > 0) {
+            $client = $this->managerBDD->getClientById($clientId);
+        }
+        $this->render('manager/client/affecter', [
+            'client' => $client,
+            'agents' => $agents
+        ]);
+    }
+        // Ajouter un bailleur via POST
+   /* public function ajouterBailleur()
+    {
+        $this->requireManagerAuth();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $nom = htmlspecialchars(trim($_POST['nom'] ?? ''));
+            $prenom = htmlspecialchars(trim($_POST['prenom'] ?? ''));
+            $email = htmlspecialchars(trim($_POST['email'] ?? ''));
+            $telephone = htmlspecialchars(trim($_POST['telephone'] ?? ''));
+            if (!$nom || !$prenom || !$email || !$telephone) {
+                $_SESSION['error'] = "Tous les champs sont requis.";
+                $this->render('manager/bailleur/ajouter', ['error' => $_SESSION['error']]);
+                exit;
+            }
+            $bailleur = new \model\Bailleur($nom, $prenom, $email, $telephone);
+            if ($this->managerBDD->addBailleur($bailleur)) {
+                $_SESSION['success'] = "Bailleur ajouté avec succès.";
+                $this->render('manager/bailleur/liste', ['success' => $_SESSION['success']]);
+                exit;
+            } else {
+                $_SESSION['error'] = "Erreur lors de l'ajout du bailleur.";
+                $this->render('manager/bailleur/ajouter', ['error' => $_SESSION['error']]);
+                exit;
+            }
+        } else {
+            $this->render('manager/bailleur/ajouter');
+        }
+    }*/
+
+    // Éditer un bailleur via POST
+    /*public function editerBailleur()
+    {
+        $this->requireManagerAuth();
+        $id = isset($_GET['id_bailleur']) ? (int)$_GET['id_bailleur'] : (int)($_POST['id_bailleur'] ?? 0);
+        $bailleurs = $this->managerBDD->getBailleurById($id);
+        if (count($bailleurs) === 0) {
+            $this->render('error/404');
+            exit;
+        }
+        $bailleur = $bailleurs[0]['objet'];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $nom = htmlspecialchars(trim($_POST['nom'] ?? ''));
+            $prenom = htmlspecialchars(trim($_POST['prenom'] ?? ''));
+            $email = htmlspecialchars(trim($_POST['email'] ?? ''));
+            $telephone = htmlspecialchars(trim($_POST['telephone'] ?? ''));
+            if (!$nom || !$prenom || !$email || !$telephone) {
+                $_SESSION['error'] = "Tous les champs sont requis.";
+                $this->render('manager/bailleur/editer', ['bailleur' => $bailleur, 'error' => $_SESSION['error']]);
+                exit;
+            }
+            $bailleur->setNom($nom);
+            $bailleur->setPrenom($prenom);
+            $bailleur->setEmail($email);
+            $bailleur->setTelephone($telephone);
+            if ($this->managerBDD->updateBailleur($id, $bailleur)) {
+                $_SESSION['success'] = "Bailleur modifié avec succès.";
+                $this->render('manager/bailleur/liste', ['success' => $_SESSION['success']]);
+                exit;
+            } else {
+                $_SESSION['error'] = "Erreur lors de la modification du bailleur.";
+                $this->render('manager/bailleur/editer', ['bailleur' => $bailleur, 'error' => $_SESSION['error']]);
+                exit;
+            }
+        } else {
+            $this->render('manager/bailleur/editer', ['bailleur' => $bailleur]);
+        }
+    }*/
+
+    // Voir un bailleur (GET)
+   /* public function voirBailleur()
+    {
+        $this->requireManagerAuth();
+        $id = isset($_GET['id_bailleur']) ? (int)$_GET['id_bailleur'] : 0;
+        $bailleurs = $this->managerBDD->getBailleurById($id);
+        if (count($bailleurs) === 0) {
+            $this->render('error/404');
+            exit;
+        }
+        $bailleur = $bailleurs[0]['objet'];
+        $this->render('manager/bailleur/voir', ['bailleur' => $bailleur]);
+    }*/
 }

@@ -18,6 +18,28 @@ class ManagerBDD extends Manager {
         $stmt->bindValue(':password', $manager->getPassword());
         return $stmt->execute();
     }
+    // Récupérer un client par son id
+    public function getClientById(int $id) {
+        $stmt = $this->pdo->prepare("SELECT * FROM client WHERE id_client = :id");
+        $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if ($row) {
+            return new \model\Client($row['nom'], $row['prenom'], $row['adresse'], $row['email'], $row['telephone'], $row['mot_de_passe'], $row['id_agent']);
+        }
+        return null;
+    }
+        // Récupérer tous les agents (sans pagination)
+    public function getAllAgents(): array {
+        $stmt = $this->pdo->query("SELECT * FROM agent");
+        $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $agents = [];
+        foreach ($data as $row) {
+            $agents[] = new \model\Agent($row['nom'], $row['prenom'], $row['username'], $row['telephone'], $row['mot_de_passe']);
+        }
+        return $agents;
+    }
+    
 
     public function getManagerByEmail(string $email) {
         $stmt = $this->pdo->prepare("SELECT * FROM manager WHERE email = ?");
@@ -139,7 +161,7 @@ class ManagerBDD extends Manager {
         $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         $agents = [];
         foreach ($data as $row) {
-            $agents[] = new \model\Agent($row['nom'], $row['prenom'], $row['email'], $row['telephone'], $row['mot_de_passe']);
+            $agents[] = new \model\Agent($row['nom'], $row['prenom'], $row['username'], $row['telephone'], $row['mot_de_passe']);
         }
         return $agents;
     }
@@ -184,9 +206,10 @@ class ManagerBDD extends Manager {
 
     // Ajouter un agent
     public function addAgent(\model\Agent $agent): bool {
-        $stmt = $this->pdo->prepare("INSERT INTO agent (nom, prenom, email, telephone, mot_de_passe) VALUES (:nom, :prenom, :email, :telephone, :mot_de_passe)");
+        $stmt = $this->pdo->prepare("INSERT INTO agent (nom, prenom, username, telephone, mot_de_passe) VALUES (:nom, :prenom, :username, :telephone, :mot_de_passe)");
         $stmt->bindValue(':nom', $agent->getNom());
         $stmt->bindValue(':prenom', $agent->getPrenom());
+        $stmt->bindValue(':username', $agent->getUsername());
         $stmt->bindValue(':telephone', $agent->getTelephone());
         $stmt->bindValue(':mot_de_passe', $agent->getPassword());
         return $stmt->execute();
@@ -194,12 +217,20 @@ class ManagerBDD extends Manager {
 
     // Modifier un agent
     public function updateAgent(int $id, \model\Agent $agent): bool {
-        $stmt = $this->pdo->prepare("UPDATE agent SET nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, mot_de_passe = :mot_de_passe WHERE id_agent = :id");
+        $stmt = $this->pdo->prepare("UPDATE agent SET nom = :nom, prenom = :prenom, username = :username, telephone = :telephone, mot_de_passe = :mot_de_passe WHERE id_agent = :id");
         $stmt->bindValue(':nom', $agent->getNom());
         $stmt->bindValue(':prenom', $agent->getPrenom());
+        $stmt->bindValue(':username', $agent->getUsername());
         $stmt->bindValue(':telephone', $agent->getTelephone());
         $stmt->bindValue(':mot_de_passe', $agent->getPassword());
         $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+     // Affecter ou réaffecter un client à un agent
+    public function affecterClientAAgent(int $clientId, int $agentId): bool {
+        $stmt = $this->pdo->prepare("UPDATE client SET id_agent = :agentId WHERE id_client = :clientId");
+        $stmt->bindValue(':agentId', $agentId, \PDO::PARAM_INT);
+        $stmt->bindValue(':clientId', $clientId, \PDO::PARAM_INT);
         return $stmt->execute();
     }
 

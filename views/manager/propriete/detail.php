@@ -1,45 +1,52 @@
 <?php require_once VIEW_PATH . 'public/layout/header.php'; ?>
 <link rel="stylesheet" href="/assets/css/manager.css">
 
-<div class="manager-detail-container">
+<main class="manager-detail-container">
     <?php foreach ($proprietes as $propriete): ?>
-        <div class="manager-detail-grid">
+        <article class="manager-detail-grid" aria-label="Détail propriété">
             <!-- Galerie d'images -->
-            <div class="manager-detail-gallery">
-                <div class="manager-detail-gallery-main">
-                    <img src="<?= ASSET_PATH ?>images/<?= htmlspecialchars($propriete['objet']->getImage1()) ?>" alt="Image 1" class="manager-detail-img-main" loading="lazy">
-                </div>
+            <section class="manager-detail-gallery" aria-label="Galerie photos">
+                <figure class="manager-detail-gallery-main">
+                    <img src="<?= ASSET_PATH ?>images/<?= htmlspecialchars($propriete['objet']->getImage1()) ?>" alt="Photo principale du bien" class="manager-detail-img-main" loading="lazy">
+                </figure>
                 <div class="manager-detail-gallery-side">
-                    <img src="<?= ASSET_PATH ?>images/<?= htmlspecialchars($propriete['objet']->getImage2()) ?>" alt="Image 2" class="manager-detail-img-side" loading="lazy">
-                    <img src="<?= ASSET_PATH ?>images/<?= htmlspecialchars($propriete['objet']->getImage3()) ?>" alt="Image 3" class="manager-detail-img-side" loading="lazy">
+                    <?php if ($propriete['objet']->getImage2()): ?>
+                        <img src="<?= ASSET_PATH ?>images/<?= htmlspecialchars($propriete['objet']->getImage2()) ?>" alt="Photo secondaire 1" class="manager-detail-img-side" loading="lazy">
+                    <?php endif; ?>
+                    <?php if ($propriete['objet']->getImage3()): ?>
+                        <img src="<?= ASSET_PATH ?>images/<?= htmlspecialchars($propriete['objet']->getImage3()) ?>" alt="Photo secondaire 2" class="manager-detail-img-side" loading="lazy">
+                    <?php endif; ?>
                 </div>
-            </div>
+            </section>
 
             <!-- Détails de la propriété -->
-            <div class="manager-detail-infos">
+            <section class="manager-detail-infos">
                 <div class="manager-detail-desc">
-                    <p><?= htmlspecialchars($propriete['objet']->getDescription()) ?></p>
-                    <?php if ($propriete['objet']->getOpt() == "Vente"): ?>
-                        <p><strong>Prix :</strong> <?= number_format($propriete['objet']->getPrix(), 0, ',', ' ') ?> CFA</p>
-                    <?php else: ?>
-                        <p><strong>Montant Mensuel :</strong> <?= number_format($propriete['objet']->getPrix(), 0, ',', ' ') ?> CFA</p>
-                    <?php endif; ?>
-                    <p><strong>Adresse :</strong> <?= htmlspecialchars($propriete['objet']->getAdresse()) ?></p>
-                    <p><strong>Type :</strong> <?= htmlspecialchars($propriete['type']->getlibele()) ?></p>
-                    <p><strong>Statut :</strong> <?= htmlspecialchars($propriete['objet']->getEtat()) ?></p>
-                    <p><strong>Option :</strong> <?= htmlspecialchars($propriete['objet']->getOpt()) ?></p>
+                    <h2 class="manager-detail-title">Description</h2>
+                    <p><?= nl2br(htmlspecialchars($propriete['objet']->getDescription())) ?></p>
+                    <ul class="manager-detail-list">
+                        <?php if ($propriete['objet']->getOpt() == "Vente"): ?>
+                            <li><span class="manager-label">Prix :</span> <b><?= number_format($propriete['objet']->getPrix(), 0, ',', ' ') ?> CFA</b></li>
+                        <?php else: ?>
+                            <li><span class="manager-label">Montant Mensuel :</span> <b><?= number_format($propriete['objet']->getPrix(), 0, ',', ' ') ?> CFA</b></li>
+                        <?php endif; ?>
+                        <li><span class="manager-label">Adresse :</span> <b><?= htmlspecialchars($propriete['objet']->getAdresse()) ?></b></li>
+                        <li><span class="manager-label">Type :</span> <b><?= htmlspecialchars($propriete['type']->getlibele()) ?></b></li>
+                        <li><span class="manager-label">Statut :</span> <b><?= htmlspecialchars($propriete['objet']->getEtat()) ?></b></li>
+                        <li><span class="manager-label">Option :</span> <b><?= htmlspecialchars($propriete['objet']->getOpt()) ?></b></li>
+                    </ul>
                 </div>
                 <!-- Actions -->
-                <div class="manager-detail-actions">
+                <nav class="manager-detail-actions" aria-label="Actions propriété">
                     <a href="/client/propriete/rdv?id=<?= base64_encode($propriete['id']) ?>" class="manager-btn manager-btn-primary">Demander une visite</a>
                     <a href="/propriete" class="manager-btn manager-btn-danger">Retour</a>
                     <?php if (isset($_SESSION['id_client'])): ?>
                         <a href="/client/propriete?id=<?= base64_encode($propriete['id']) ?>" class="manager-btn manager-btn-success">Ajouter aux favoris</a>
                     <?php endif; ?>
-                </div>
-            </div>
-        </div>
+                </nav>
+            </section>
+        </article>
     <?php endforeach; ?>
-</div>
+</main>
 
 <?php require_once VIEW_PATH . 'public/layout/footer.php'; ?>

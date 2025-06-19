@@ -7,8 +7,15 @@
         <button id="closeSidebar" class="close-sidebar" aria-label="Fermer le menu">&times;</button>
     </div>
     <ul class="side-navbar-list">
-        <li><a href="/manager/accueil">Tableau de bord</a></li>
-        <li><a href="/manager/clients">Utilisateurs</a></li>
+        <li><a href="/manager/dashboard">Tableau de bord</a></li>
+        <li class="side-dropdown">
+            <a href="#" class="side-dropbtn">Utilisateurs <span class="chevron">&#8250;</span></a>
+            <ul class="side-dropdown-content">
+                <li><a href="/manager/clients">Client</a></li>
+                <li><a href="/manager/bailleurs">Bailleur</a></li>
+                <li><a href="/manager/agents">Agent</a></li>
+            </ul>
+        </li>
         <li><a href="/manager/proprietes">Propriétés</a></li>
         <li><a href="/manager/contrats">Contrats</a></li>
         <li><a href="/manager/paiments">Paiements</a></li>

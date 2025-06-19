@@ -42,11 +42,39 @@ class Router {
         '/manager/inscription' => ['controllers\ManagerControllers', 'addManager'],
         '/manager/logout' => ['controllers\ManagerControllers', 'logoutManager'],
         '/manager/dashboard' => ['controllers\ManagerControllers', 'dashboard'],
+        // Agents CRUD
+        '/manager/agents' => ['controllers\ManagerControllers', 'listAgents'],
+        '/manager/agent/ajouter' => ['controllers\ManagerControllers', 'ajouterAgent'],
+        '/manager/agent/editer' => ['controllers\ManagerControllers', 'editerAgent'],
+        '/manager/agent/voir' => ['controllers\ManagerControllers', 'voirAgent'],
+        '/manager/agent/supprimer' => ['controllers\ManagerControllers', 'supprimerAgent'],
+        // Clients CRUD
         '/manager/clients' => ['controllers\ManagerControllers', 'listClients'],
+        '/manager/client/ajouter' => ['controllers\ManagerControllers', 'ajouterClient'],
+        '/manager/client/editer' => ['controllers\ManagerControllers', 'editerClient'],
+        '/manager/client/voir' => ['controllers\ManagerControllers', 'voirClient'],
+        '/manager/client/supprimer' => ['controllers\ManagerControllers', 'deleteClient'],
+        // Bailleurs CRUD
+        '/manager/bailleurs' => ['controllers\ManagerControllers', 'listBailleurs'],
+        '/manager/bailleur/ajouter' => ['controllers\ManagerControllers', 'ajouterBailleur'],
+        '/manager/bailleur/editer' => ['controllers\ManagerControllers', 'editerBailleur'],
+        '/manager/bailleur/voir' => ['controllers\ManagerControllers', 'voirBailleur'],
+        '/manager/bailleur/supprimer' => ['controllers\ManagerControllers', 'deleteBailleur'],
+        // Propriétés CRUD
         '/manager/proprietes' => ['controllers\ManagerControllers', 'listProprietes'],
+        '/manager/propriete/ajouter' => ['controllers\ManagerControllers', 'ajouterPropriete'],
+        '/manager/propriete/editer' => ['controllers\ManagerControllers', 'editerPropriete'],
+        '/manager/propriete/voir' => ['controllers\ManagerControllers', 'voirPropriete'],
+        '/manager/propriete/supprimer' => ['controllers\ManagerControllers', 'deletePropriete'],
+        // Contrats, paiements, messages
         '/manager/contrats' => ['controllers\ManagerControllers', 'listContrats'],
         '/manager/paiements' => ['controllers\ManagerControllers', 'listPaiements'],
         '/manager/messages' => ['controllers\ManagerControllers', 'listMessages'],
+        // Affectation client à agent
+        '/manager/client/affecter' => ['controllers\ManagerControllers', 'affecterClientAgent'],
+        // Profil manager
+        '/manager/profile' => ['controllers\ManagerControllers', 'Profile'],
+        '/manager/profile/edit' => ['controllers\ManagerControllers', 'updateProfile'],
 
         //agent routes
         '/agent' => ['controllers\AgentControllers', 'login_Agent'],
