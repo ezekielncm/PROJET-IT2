@@ -1,0 +1,55 @@
+version: '3.9'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: urbanhome-web
+    ports:
+      - "8000:80"
+    volumes:
+      - ./public:/var/www/html/public
+      - ./views:/var/www/html/views
+      - ./controllers:/var/www/html/controllers
+      - ./model:/var/www/html/model
+      - ./config:/var/www/html/config
+      - ./routes:/var/www/html/routes
+      - ./src:/var/www/html/src
+      - ./public/assets:/var/www/html/public/assets
+      - ./vendor:/var/www/html/vendor
+      - ./composer.json:/var/www/html/composer.json
+      - ./composer.lock:/var/www/html/composer.lock
+      - ./.env:/var/www/html/.env
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_NAME=urbanhome
+      - DB_USER=root
+      - DB_PASS=urbanhomepass
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    container_name: urbanhome-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: urbanhome
+      MYSQL_ROOT_PASSWORD: urbanhomepass
+      MYSQL_USER: urbanuser
+      MYSQL_PASSWORD: urbanhomepass
+    ports:
+      - "3307:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./urbanhome.sql:/docker-entrypoint-initdb.d/urbanhome.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db-data:
+

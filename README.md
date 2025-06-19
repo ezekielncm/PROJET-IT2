@@ -20,41 +20,83 @@ UrbanHome est une application web de gestion immobilière moderne, développée 
 - Rafraîchissement automatique, menu responsive, gestion du drawer/burger menu
 - Expérience utilisateur améliorée : flash messages animés, formulaires accessibles, pagination, cards, responsive, cohérence visuelle UrbanHome
 
-## 🛠️ Installation rapide
+
+## 🛠️ Installation rapide (local ou Docker)
+
+### ▶️ Avec Docker Compose (recommandé)
+
+1. **Cloner ou télécharger le projet** dans un dossier de votre choix.
+2. **Configurer les variables d'environnement** dans le fichier `.env` à la racine :
+
+   ```env
+   DB_HOST=db
+   DB_NAME=urbanhome
+   DB_USER=root
+   DB_PASS=urbanhomepass
+   ```
+
+3. **Lancer l'environnement Docker Compose** :
+
+   ```powershell
+   docker compose up -d
+   ```
+
+   - Le service web (PHP/Apache) sera accessible sur [http://localhost:8000](http://localhost:8000)
+   - Le service MySQL écoute sur le port 3307 de l’hôte (utile pour se connecter avec un client externe)
+   - La base de données sera automatiquement initialisée avec le script `urbanhome.sql` (tables, données de démo si présentes)
+
+4. **(Optionnel) Import manuel de la base**
+   Si besoin de réimporter le SQL :
+   ```powershell
+   docker compose exec db bash
+   mysql -u root -purbanhomepass urbanhome < /docker-entrypoint-initdb.d/urbanhome.sql
+   ```
+
+5. **Arrêter l’environnement** :
+   ```powershell
+   docker compose down
+   ```
+
+#### 📦 Volumes et persistance
+- Les données MySQL sont persistées dans le volume `db-data`.
+- Pour réinitialiser complètement la base (attention, perte de données) :
+  ```powershell
+  docker compose down -v
+  docker compose up -d
+  ```
+
+#### 🐳 Remarques Docker
+- Le fichier `compose.yaml` ne nécessite plus la clé `version:` (obsolète).
+- Le script SQL est monté dans le conteneur MySQL pour un import automatique à la première initialisation.
+- Les variables d’environnement sont injectées dans le conteneur web et accessibles via `getenv()` ou Dotenv.
+
+### ▶️ Installation manuelle (WAMP/XAMPP)
 
 1. **Cloner ou télécharger le projet** dans un dossier de votre serveur local (WAMP, XAMPP, etc.) supportant PHP >= 7.4 et MySQL.
-2. **Importer la base de données** :
+2. **Importer la base de données** :
    - Fichier : `urbanhome.sql`
-   - Utilisez phpMyAdmin ou la ligne de commande MySQL :
-
+   - Utilisez phpMyAdmin ou la ligne de commande MySQL :
      ```sql
      source urbanhome.sql;
      ```
-
-3. **Configurer les variables d'environnement** dans le fichier `.env` à la racine :
-
+3. **Configurer les variables d'environnement** dans le fichier `.env` à la racine :
    ```env
    DB_HOST='localhost'
    DB_NAME='urbanhome'
    DB_USER='root'
    DB_PASS=''
    ```
-
-4. **Installer les dépendances Composer** :
-
+4. **Installer les dépendances Composer** :
    ```powershell
    composer install
    composer dump-autoload
    composer require vlucas/phpdotenv
    ```
-
-5. **Lancer le serveur PHP intégré** (ou configurer Apache/Nginx) :
-
+5. **Lancer le serveur PHP intégré** (ou configurer Apache/Nginx) :
    ```powershell
    php -S localhost:8000 -t public
    ```
-
-6. **Accéder à l'application** : [http://localhost:8000](http://localhost:8000)
+6. **Accéder à l'application** : [http://localhost:8000](http://localhost:8000)
 
 ## 🗂️ Structure des dossiers
 
@@ -65,8 +107,7 @@ UrbanHome est une application web de gestion immobilière moderne, développée 
 - `config/` : configuration (connexion PDO, chargement .env)
 - `routes/` : gestion des routes (`Router.php`)
 - `public/assets/` : ressources statiques (CSS, JS, images)
-    - `css/` : fichiers CSS séparés par espace (`main.css`, `client.css`, `bailleur.css`, `manager.css`, `agent.css`, `public.css`)
-    - `js/` : scripts dédiés (ex : animation flash messages)
+- `css/` : fichiers CSS séparés par espace (`main.css`, `client.css`, `bailleur.css`, `manager.css`, `agent.css`, `public.css`) - `js/` : scripts dédiés (ex : animation flash messages)
 - `src/` : initialisation de l'application (App.php)
 
 ## 🌐 Exemples de routes principales
@@ -148,13 +189,23 @@ UrbanHome est une application web de gestion immobilière moderne, développée 
 - Pensez à sécuriser vos accès et à mettre à jour vos dépendances
 - Pour contribuer, ouvrez une issue ou une pull request sur le dépôt
 
-## 📊 Exemple de configuration `.env`
 
+## 📊 Exemples de configuration `.env`
+
+### Pour Docker Compose
 ```env
-DB_HOST='localhost'
-DB_NAME='urbanhome'
-DB_USER='root'
-DB_PASS=''
+DB_HOST=db
+DB_NAME=urbanhome
+DB_USER=root
+DB_PASS=urbanhomepass
+```
+
+### Pour un environnement local classique (WAMP/XAMPP)
+```env
+DB_HOST=localhost
+DB_NAME=urbanhome
+DB_USER=root
+DB_PASS=
 ```
 
 ## 🗄️ Exemple d'import de la base de données
@@ -183,4 +234,3 @@ DB_PASS=''
 **Bonne utilisation de UrbanHome !**
 
 Pour toute question ou contribution, n'hésitez pas à ouvrir une issue ou une pull request.
-
