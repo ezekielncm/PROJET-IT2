@@ -53,19 +53,19 @@ class Router {
         '/manager/client/ajouter' => ['controllers\ManagerControllers', 'ajouterClient'],
         '/manager/client/editer' => ['controllers\ManagerControllers', 'editerClient'],
         '/manager/client/voir' => ['controllers\ManagerControllers', 'voirClient'],
-        '/manager/client/supprimer' => ['controllers\ManagerControllers', 'deleteClient'],
+        '/manager/client/supprimer' => ['controllers\ManagerControllers', 'supprimerClient'],
         // Bailleurs CRUD
         '/manager/bailleurs' => ['controllers\ManagerControllers', 'listBailleurs'],
         '/manager/bailleur/ajouter' => ['controllers\ManagerControllers', 'ajouterBailleur'],
         '/manager/bailleur/editer' => ['controllers\ManagerControllers', 'editerBailleur'],
         '/manager/bailleur/voir' => ['controllers\ManagerControllers', 'voirBailleur'],
-        '/manager/bailleur/supprimer' => ['controllers\ManagerControllers', 'deleteBailleur'],
+        '/manager/bailleur/supprimer' => ['controllers\ManagerControllers', 'supprimerBailleur'],
         // Propriétés CRUD
         '/manager/proprietes' => ['controllers\ManagerControllers', 'listProprietes'],
         '/manager/propriete/ajouter' => ['controllers\ManagerControllers', 'ajouterPropriete'],
         '/manager/propriete/editer' => ['controllers\ManagerControllers', 'editerPropriete'],
         '/manager/propriete/voir' => ['controllers\ManagerControllers', 'voirPropriete'],
-        '/manager/propriete/supprimer' => ['controllers\ManagerControllers', 'deletePropriete'],
+        '/manager/propriete/supprimer' => ['controllers\ManagerControllers', 'supprimerPropriete'],
         // Contrats, paiements, messages
         '/manager/contrats' => ['controllers\ManagerControllers', 'listContrats'],
         '/manager/paiements' => ['controllers\ManagerControllers', 'listPaiements'],

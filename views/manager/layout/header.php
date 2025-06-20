@@ -25,7 +25,7 @@
         <?php include __DIR__ . '/navbar.php'; ?>
         <div class="auth">
             <span class="auth-icon">&#128100;</span>
-            <span class="auth-text"><a href="/manager/mon-profil" style="color:#fff;text-decoration:none;">Mon profil</a></span>
+            <span class="auth-text"><a href="/manager/profile" style="color:#fff;text-decoration:none;">Mon profil</a></span>
         </div>
     </header>
     <main>

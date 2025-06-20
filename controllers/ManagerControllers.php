@@ -1,26 +1,180 @@
 <?php
+
 namespace controllers;
+
 use controllers\Controllers;
 use model\Manager;
 use model\ManagerBDD;
+use model\AgentBDD;
+use model\BailleurBDD;
+use model\clientBDD;
+use model\ProprieteBDD;
+use model\ContratBDD;
+use model\PaiementBDD;
 
 class ManagerControllers extends Controllers
 {
+    // Voir une propriété (détail)
+    public function voirPropriete()
+    {
+        $this->requireManagerAuth();
+        $id = isset($_GET['id']) ? base64_decode($_GET['id']) : null;
+        if (!$id) {
+            $this->render('error/404');
+            return;
+        }
+        $proprieteBDD = new \model\ProprieteBDD();
+        $proprietes = $proprieteBDD->getProprieteById($id);
+        if (!$proprietes || count($proprietes) === 0) {
+            $this->render('error/404');
+            return;
+        }
+        $this->render('manager/propriete/detail', ['proprietes' => $proprietes]);
+    }
+
+    // Ajouter une propriété (formulaire + traitement)
+    public function ajouterPropriete()
+    {
+        $this->requireManagerAuth();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Récupérer et valider les champs du formulaire
+            $data = [
+                'id_type' => $_POST['id_type'] ?? null,
+                'etat' => $_POST['etat'] ?? '',
+                'opt' => $_POST['opt'] ?? '',
+                'situation_geo' => $_POST['adresse'] ?? '',
+                'prix' => $_POST['prix'] ?? 0,
+                'image1' => $_POST['image1'] ?? '',
+                'image2' => $_POST['image2'] ?? '',
+                'image3' => $_POST['image3'] ?? '',
+                'descriptions' => $_POST['description'] ?? '',
+                'id_bailleur' => $_POST['id_bailleur'] ?? null,
+                'date_ajout' => date('Y-m-d'),
+            ];
+            $propriete = new \model\Propriete(
+                0, // id auto-incrémenté
+                (int)$data['id_type'],
+                $data['etat'],
+                $data['opt'],
+                $data['situation_geo'],
+                (float)$data['prix'],
+                $data['image1'],
+                $data['image2'],
+                $data['image3'],
+                $data['descriptions'],
+                $data['id_bailleur'],
+                $data['date_ajout']
+            );
+            $proprieteBDD = new \model\ProprieteBDD();
+            if ($proprieteBDD->insertPropriete($propriete)) {
+                $_SESSION['success'] = "Propriété ajoutée avec succès.";
+                header('Location: /manager/propriete');
+                exit;
+            } else {
+                $error = "Erreur lors de l'ajout de la propriété.";
+                $this->render('manager/propriete/ajouter', ['error' => $error]);
+                return;
+            }
+        }
+        $this->render('manager/propriete/ajouter');
+    }
+
+    // Editer une propriété (formulaire + traitement)
+    public function editerPropriete()
+    {
+        $this->requireManagerAuth();
+        $id = isset($_GET['id']) ? base64_decode($_GET['id']) : null;
+        $proprieteBDD = new \model\ProprieteBDD();
+        if (!$id) {
+            $this->render('error/404');
+            return;
+        }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = [
+                'id' => $_POST['id'] ?? $id,
+                'id_type' => $_POST['id_type'] ?? null,
+                'etat' => $_POST['etat'] ?? '',
+                'opt' => $_POST['opt'] ?? '',
+                'situation_geo' => $_POST['adresse'] ?? '',
+                'prix' => $_POST['prix'] ?? 0,
+                'image1' => $_POST['image1'] ?? '',
+                'image2' => $_POST['image2'] ?? '',
+                'image3' => $_POST['image3'] ?? '',
+                'descriptions' => $_POST['description'] ?? '',
+                'id_bailleur' => $_POST['id_bailleur'] ?? null,
+                'date_ajout' => $_POST['date_ajout'] ?? date('Y-m-d'),
+            ];
+            $propriete = new \model\Propriete(
+                (int)$data['id'],
+                (int)$data['id_type'],
+                $data['etat'],
+                $data['opt'],
+                $data['situation_geo'],
+                (float)$data['prix'],
+                $data['image1'],
+                $data['image2'],
+                $data['image3'],
+                $data['descriptions'],
+                $data['id_bailleur'],
+                $data['date_ajout']
+            );
+            if ($proprieteBDD->UpdateProprieteById($data['id'], $propriete)) {
+                $_SESSION['success'] = "Propriété modifiée avec succès.";
+                header('Location: /manager/propriete');
+                exit;
+            } else {
+                $error = "Erreur lors de la modification de la propriété.";
+                $proprietes = $proprieteBDD->getProprieteById($data['id']);
+                $this->render('manager/propriete/editer', ['error' => $error, 'proprietes' => $proprietes]);
+                return;
+            }
+        }
+        $proprietes = $proprieteBDD->getProprieteById($id);
+        $this->render('manager/propriete/editer', ['proprietes' => $proprietes]);
+    }
+
+    // Supprimer une propriété
+    public function supprimerPropriete()
+    {
+        $this->requireManagerAuth();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = $_POST['id'] ?? null;
+            if ($id) {
+                $proprieteBDD = new \model\ProprieteBDD();
+                $deleted = $proprieteBDD->deletePropriete($id);
+                if ($deleted) {
+                    $_SESSION['success'] = "Propriété supprimée avec succès.";
+                } else {
+                    $_SESSION['error'] = "Erreur lors de la suppression de la propriété.";
+                }
+                header('Location: /manager/proprietes');
+                exit;
+            }
+        }
+        $this->render('error/404');
+    }
 
 
-    private $managerBDD;
+    private $managerBDD,$agentBDD,$bailleurBDD,$clientBDD,$proprieteBDD,$contratBDD,$paiementBDD;
 
     public function __construct()
     {
         $this->managerBDD = new ManagerBDD();
+        $this->bailleurBDD = new BailleurBDD();
+        $this->clientBDD = new clientBDD();
+        $this->proprieteBDD = new ProprieteBDD();
+        $this->contratBDD = new ContratBDD();
+        $this->paiementBDD = new PaiementBDD();
+        $this->agentBDD = new AgentBDD();
     }
+
 
     // Ajouter un manager via POST
     public function addManager()
     {
         if (isset($_SESSION['id_manager'])) {
             // Si déjà connecté, rediriger vers tableau de bord
-            $this->render("manager/accueil");
+            $this->render("manager/dash");
             exit;
         }
 
@@ -68,7 +222,7 @@ class ManagerControllers extends Controllers
     {
         if (isset($_SESSION['id_manager'])) {
             // Si déjà connecté, rediriger vers tableau de bord
-            $this->render("manager/accueil");
+            $this->render("manager/dash");
             exit;
         }
 
@@ -96,7 +250,7 @@ class ManagerControllers extends Controllers
                 $_SESSION['prenom_manager'] = $manager->getPrenom();
                 $_SESSION['email_manager'] = $manager->getEmail();
 
-                $this->render('manager/accueil');
+                $this->render('manager/dash');
                 exit;
             } else {
                 $_SESSION['error'] = "Mot de passe incorrect.";
@@ -173,7 +327,7 @@ class ManagerControllers extends Controllers
     public function supprimerAgent()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $id_agent = intval($_POST['id_agent'] ?? 0);
+            $id_agent = intval($_POST['id'] ?? 0);
             if ($id_agent > 0) {
                 if ($this->managerBDD->supprimerAgent($id_agent)) {
                     $_SESSION['success'] = "Agent supprimé avec succès.";
@@ -183,7 +337,7 @@ class ManagerControllers extends Controllers
             } else {
                 $_SESSION['error'] = "ID agent invalide.";
             }
-            $this->render('manager/agent/liste');
+            header('Location: /manager/agents');
             exit;
         }
         $this->render('error/404');
@@ -218,7 +372,7 @@ class ManagerControllers extends Controllers
 
             if ($this->managerBDD->addAgent($agent)) {
                 $_SESSION['success'] = "Agent ajouté avec succès.";
-                $this->render('manager/agent/liste', ['success' => $_SESSION['success']]);
+                header('Location: /manager/agents');
                 exit;
             } else {
                 $_SESSION['error'] = "Erreur lors de l'ajout de l'agent.";
@@ -233,20 +387,20 @@ class ManagerControllers extends Controllers
     // Lister les propriétés avec pagination
     public function listProprietes()
     {
+        $this->requireManagerAuth();
         $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
         $limit = 10;
         $offset = ($page - 1) * $limit;
-
-        $proprietes = $this->managerBDD->getProprietes($limit, $offset);
+        $proprietes = $this->proprieteBDD->getAlldataforpropriete($limit, $offset);
         $total = $this->managerBDD->countProprietes();
         $totalPages = ceil($total / $limit);
-
         $this->render('manager/propriete/liste', [
             'proprietes' => $proprietes,
             'page' => $page,
             'totalPages' => $totalPages
         ]);
     }
+
     // Dashboard/statistiques manager
     public function dashboard()
     {
@@ -279,7 +433,7 @@ class ManagerControllers extends Controllers
         $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
         $limit = 10;
         $offset = ($page - 1) * $limit;
-        $clients = $this->managerBDD->getClients($limit, $offset);
+        $clients = $this->clientBDD->getAllClients($limit, $offset);
         $total = $this->managerBDD->countClients();
         $totalPages = ceil($total / $limit);
         $this->render('manager/client/liste', [
@@ -296,7 +450,7 @@ class ManagerControllers extends Controllers
         $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
         $limit = 10;
         $offset = ($page - 1) * $limit;
-        $bailleurs = $this->managerBDD->getBailleurs($limit, $offset);
+        $bailleurs = $this->bailleurBDD->getAllBailleurs($limit, $offset);
         $total = $this->managerBDD->countBailleurs();
         $totalPages = ceil($total / $limit);
         $this->render('manager/bailleur/liste', [
@@ -313,7 +467,7 @@ class ManagerControllers extends Controllers
         $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
         $limit = 10;
         $offset = ($page - 1) * $limit;
-        $agents = $this->managerBDD->getAgents($limit, $offset);
+        $agents = $this->agentBDD->getAllAgents($limit, $offset);
         $total = $this->managerBDD->countAgents();
         $totalPages = ceil($total / $limit);
         $this->render('manager/agent/liste', [
@@ -409,8 +563,8 @@ class ManagerControllers extends Controllers
             'agents' => $agents
         ]);
     }
-        // Ajouter un bailleur via POST
-   /* public function ajouterBailleur()
+    // Ajouter un bailleur via POST
+    /* public function ajouterBailleur()
     {
         $this->requireManagerAuth();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -478,7 +632,7 @@ class ManagerControllers extends Controllers
     }*/
 
     // Voir un bailleur (GET)
-   /* public function voirBailleur()
+    /* public function voirBailleur()
     {
         $this->requireManagerAuth();
         $id = isset($_GET['id_bailleur']) ? (int)$_GET['id_bailleur'] : 0;

@@ -99,6 +99,139 @@
     color: #fff;
     border-color: #38b2ac;
 }
+@media (max-width: 700px) {
+    .bailleurs-container { padding: 1rem 0.3rem; }
+    .bailleurs-list { flex-direction: column; gap: 1rem; }
+    .bailleur-card { max-width: 100%; min-width: 0; }
+}
+.bailleur-form-container {
+    max-width: 500px;
+    margin: 2rem auto;
+    background: rgba(255,255,255,0.92);
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(26,54,93,0.07);
+    padding: 2rem 2.5rem;
+}
+.bailleur-form label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: 600;
+    color: #234e70;
+}
+.bailleur-form input[type="text"],
+.bailleur-form input[type="email"] {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    margin-top: 0.3rem;
+    font-size: 1rem;
+    margin-bottom: 0.7rem;
+}
+.bailleur-form button, .bailleur-form .btn {
+    margin-top: 1.2rem;
+}
+/* UrbanHome - Styles pour la gestion des bailleurs (liste, voir, ajouter, editer) */
+.bailleurs-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    background: rgba(255,255,255,0.85);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 2rem 2.5rem;
+}
+.titre-page {
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: #1a365d;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.flash-success, .flash-error {
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.2rem;
+    font-weight: 500;
+    text-align: center;
+}
+.flash-success { background: #e6fffa; color: #276749; border: 1px solid #38b2ac; }
+.flash-error { background: #fff5f5; color: #c53030; border: 1px solid #feb2b2; }
+.bailleurs-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+.bailleur-card {
+    background: rgba(255,255,255,0.95);
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(26,54,93,0.07);
+    padding: 1.2rem 1.5rem;
+    min-width: 260px;
+    max-width: 320px;
+    flex: 1 1 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: box-shadow 0.2s;
+}
+.bailleur-card:hover {
+    box-shadow: 0 6px 24px rgba(26,54,93,0.13);
+}
+.bailleur-info h2 {
+    font-size: 1.2rem;
+    color: #234e70;
+    margin-bottom: 0.5rem;
+}
+.bailleur-info p {
+    margin: 0.2rem 0;
+    color: #3a506b;
+    font-size: 1rem;
+}
+.bailleur-actions {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+.btn {
+    padding: 0.5rem 1.1rem;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+    outline: none;
+}
+.btn-view { background: #e2e8f0; color: #234e70; }
+.btn-edit { background: #bee3f8; color: #234e70; }
+.btn-delete { background: #feb2b2; color: #c53030; }
+.btn-add { background: #38b2ac; color: #fff; margin-top: 1.5rem; display: inline-block; }
+.btn-back { background: #e2e8f0; color: #234e70; margin-top: 1.5rem; display: inline-block; }
+.btn:hover, .btn:focus { filter: brightness(0.95); }
+.pagination {
+    margin: 2rem 0 1rem 0;
+    text-align: center;
+}
+.page-link {
+    display: inline-block;
+    margin: 0 0.2rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 5px;
+    background: #f7fafc;
+    color: #234e70;
+    text-decoration: none;
+    font-weight: 500;
+    border: 1px solid #e2e8f0;
+    transition: background 0.15s, color 0.15s;
+}
+.page-link.active, .page-link:hover {
+    background: #38b2ac;
+    color: #fff;
+    border-color: #38b2ac;
+}
 /* Responsive */
 @media (max-width: 700px) {
     .bailleurs-container { padding: 1rem 0.3rem; }

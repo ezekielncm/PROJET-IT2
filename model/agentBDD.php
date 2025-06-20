@@ -53,11 +53,12 @@ class AgentBDD extends Config{
         }
         return $agents;
     }
-    // function pour recuperer tous les agents
-    public function getAllAgents($limit,$ofset)
+    // function pour recuperer tous les agents avec pagination et id unique en premier argument
+    public function getAllAgents($limit, $offset)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM agent 
-        LIMIT :limit OFFSET :ofset");
+        $stmt = $this->pdo->prepare("SELECT * FROM agent LIMIT :limit OFFSET :offset");
+        $stmt->bindValue(':limit', (int)$limit, \PDO::PARAM_INT);
+        $stmt->bindValue(':offset', (int)$offset, \PDO::PARAM_INT);
         $stmt->execute();
         $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         $agents = [];
@@ -87,13 +88,11 @@ class AgentBDD extends Config{
   
     public function LoginAgent($username,$password)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM agent WHERE username = ? AND mot_de_passe = ?");
-        $stmt->execute([$username,$password]);
-        $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        $agents = [];
-        foreach ($data as $row) {
-            if($password===$row['mot_de_passe']){
-                  return [
+        $stmt = $this->pdo->prepare("SELECT * FROM agent WHERE username = ?");
+        $stmt->execute([$username]);
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if ($row && password_verify($password, $row['mot_de_passe'])) {
+            return [
                 'id_agent' => $row['id_agent'],
                 'objet'=> new Agent($row['nom'], $row['prenom'],   $row['username'],$row['telephone'], $row['mot_de_passe']),
             ];
@@ -101,7 +100,7 @@ class AgentBDD extends Config{
           
         }
          
-    }
+    
 public function client_affecter($id_agent, $limit, $offset) {
     $sql = "SELECT * FROM client 
             WHERE id_agent = :id_agent 

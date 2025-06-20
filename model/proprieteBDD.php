@@ -29,14 +29,16 @@ class ProprieteBDD extends Propriete{
         
         ]);
     }
-    public function getpropriete($limit,$ofset){
-        $stmt = $this->pdo->prepare("SELECT * FROM propriete LIMIT :limit OFFSET :ofset");
+    public function getPropriete($limit, $offset) {
+        $stmt = $this->pdo->prepare("SELECT * FROM propriete LIMIT :limit OFFSET :offset");
+        $stmt->bindParam(':limit', $limit, \PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, \PDO::PARAM_INT);
         $stmt->execute();
         $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         $proprietes = [];
         foreach ($data as $row) {
             $proprietes[] = [
-                'id' => $row['id_propriete'],
+                'id' => $row['id_propiete'],
                 'objet'=> new Propriete($row['id_type'], $row['etat'], $row['opt'], $row['situation_geo'],$row['prix'], $row['image1'], $row['image2'], $row['image3'], $row['descriptions'],$row['id_bailleur'],$row['date_ajout']),
             ];
         }

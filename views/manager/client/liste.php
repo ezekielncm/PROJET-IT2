@@ -24,18 +24,18 @@ require_once __DIR__ . '/../layout/header.php';
                     <?php foreach ($clients as $client) : ?>
                         <div class="manager-card" tabindex="0" aria-label="Fiche client">
                             <div class="manager-card-header">
-                                <span class="manager-card-title"><?= htmlspecialchars($client->getNom()) ?> <?= htmlspecialchars($client->getPrenom()) ?></span>
+                                <span class="manager-card-title"><?= htmlspecialchars($client['objet']->getNom()) ?> <?= htmlspecialchars($client['objet']->getPrenom()) ?></span>
                             </div>
                             <div class="manager-card-body">
-                                <p><span class="manager-label">Email :</span> <b><?= htmlspecialchars($client->getEmail()) ?></b></p>
-                                <p><span class="manager-label">Téléphone :</span> <b><?= htmlspecialchars($client->getNumero_telephone()) ?></b></p>
-                                <p><span class="manager-label">Adresse :</span> <b><?= htmlspecialchars($client->getAdresse()) ?></b></p>
+                                <p><span class="manager-label">Email :</span> <b><?= htmlspecialchars($client['objet']->getEmail()) ?></b></p>
+                                <p><span class="manager-label">Téléphone :</span> <b><?= htmlspecialchars($client['objet']->getNumero_telephone()) ?></b></p>
+                                <p><span class="manager-label">Adresse :</span> <b><?= htmlspecialchars($client['objet']->getAdresse()) ?></b></p>
                             </div>
                             <div class="manager-card-actions">
-                                <a href="/manager/client/voir?id=<?= urlencode($client->getId()) ?>" class="manager-btn manager-btn-primary" title="Voir le client"><span aria-hidden="true">👁️</span> Voir</a>
-                                <a href="/manager/client/edit?id=<?= urlencode($client->getId()) ?>" class="manager-btn manager-btn-success" title="Éditer le client"><span aria-hidden="true">✏️</span> Éditer</a>
-                                <a href="/manager/client/delete?id=<?= urlencode($client->getId()) ?>" class="manager-btn manager-btn-danger" title="Supprimer le client" onclick="return confirm('Supprimer ce client ?');"><span aria-hidden="true">🗑️</span> Supprimer</a>
-                                <a href="/manager/client/affecter?client_id=<?= urlencode($client->getId()) ?>" class="manager-btn manager-btn-secondary" title="Affecter à un agent"><span aria-hidden="true">🤝</span> Affecter à un agent</a>
+                                <a href="/manager/client/voir?id=<?= urlencode($client['id']) ?>" class="manager-btn manager-btn-primary" title="Voir le client"><span aria-hidden="true">👁️</span> Voir</a>
+                                <a href="/manager/client/edit?id=<?= urlencode($client['id']) ?>" class="manager-btn manager-btn-success" title="Éditer le client"><span aria-hidden="true">✏️</span> Éditer</a>
+                                <a href="/manager/client/delete?id=<?= urlencode($client['id']) ?>" class="manager-btn manager-btn-danger" title="Supprimer le client" onclick="return confirm('Supprimer ce client ?');"><span aria-hidden="true">🗑️</span> Supprimer</a>
+                                <a href="/manager/client/affecter?client_id=<?= urlencode($client['id']) ?>" class="manager-btn manager-btn-secondary" title="Affecter à un agent"><span aria-hidden="true">🤝</span> Affecter à un agent</a>
                             </div>
                         </div>
                     <?php endforeach; ?>

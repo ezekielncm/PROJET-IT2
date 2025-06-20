@@ -123,7 +123,7 @@ class clientBDD extends Client
         foreach ($data as $row) {
             $clients[] = [
                 'id' => $row['id_client'],
-                'objet' => new Client($row['nom'], $row['prenom'], $row['adresse'], $row['email'], $row['numero_telephone'], $row['motd_de_passe'], $row['id_agent']),
+                'objet' => new Client($row['nom'], $row['prenom'], $row['adresse'], $row['email'], $row['telephone'], $row['mot_de_passe'], $row['id_agent']),
 
             ];
         }
