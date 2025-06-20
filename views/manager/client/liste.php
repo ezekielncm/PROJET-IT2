@@ -33,8 +33,8 @@ require_once __DIR__ . '/../layout/header.php';
                             </div>
                             <div class="manager-card-actions">
                                 <a href="/manager/client/voir?id=<?= urlencode($client['id']) ?>" class="manager-btn manager-btn-primary" title="Voir le client"><span aria-hidden="true">👁️</span> Voir</a>
-                                <a href="/manager/client/edit?id=<?= urlencode($client['id']) ?>" class="manager-btn manager-btn-success" title="Éditer le client"><span aria-hidden="true">✏️</span> Éditer</a>
-                                <a href="/manager/client/delete?id=<?= urlencode($client['id']) ?>" class="manager-btn manager-btn-danger" title="Supprimer le client" onclick="return confirm('Supprimer ce client ?');"><span aria-hidden="true">🗑️</span> Supprimer</a>
+                                <a href="/manager/client/editer?id=<?= urlencode($client['id']) ?>" class="manager-btn manager-btn-success" title="Éditer le client"><span aria-hidden="true">✏️</span> Éditer</a>
+                                <a href="/manager/client/supprimer?id=<?= urlencode($client['id']) ?>" class="manager-btn manager-btn-danger" title="Supprimer le client" onclick="return confirm('Supprimer ce client ?');"><span aria-hidden="true">🗑️</span> Supprimer</a>
                                 <a href="/manager/client/affecter?client_id=<?= urlencode($client['id']) ?>" class="manager-btn manager-btn-secondary" title="Affecter à un agent"><span aria-hidden="true">🤝</span> Affecter à un agent</a>
                             </div>
                         </div>

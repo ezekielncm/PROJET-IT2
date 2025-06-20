@@ -17,8 +17,8 @@
             </ul>
         </li>
         <li><a href="/manager/proprietes">Propriétés</a></li>
-        <li><a href="/manager/contrats">Contrats</a></li>
-        <li><a href="/manager/paiments">Paiements</a></li>
+       <!-- <li><a href="/manager/contrats">Contrats</a></li>-->
+        <li><a href="/manager/paiements">Paiements</a></li>
         <li><a href="/manager/profile">Profil</a></li>
         <li><a href="/manager/logout" style="color:#c00;">Déconnexion</a></li>
     </ul>

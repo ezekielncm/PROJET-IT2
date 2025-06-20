@@ -8,27 +8,27 @@
     <div class="manager-sections">
         <div class="manager-section">
             <h2 class="manager-gradient-title">Utilisateurs</h2>
-            <p>Nombre total d’utilisateurs : <strong><?= $stats['users'] ?? '--' ?></strong></p>
+            <p>Nombre total d’utilisateurs : <strong><?= $nb_users ?? '--' ?></strong></p>
             <a href="/manager/clients" class="btn-manager">Voir les clients</a>
             <a href="/manager/agents" class="btn-manager">Voir les agents</a>
             <a href="/manager/bailleurs" class="btn-manager">Voir les bailleurs</a>
         </div>
         <div class="manager-section">
             <h2 class="manager-gradient-title">Propriétés</h2>
-            <p>Biens gérés : <strong><?= $stats['proprietes'] ?? '--' ?></strong></p>
+            <p>Biens gérés : <strong><?= $nb_proprietes ?? '--' ?></strong></p>
             <a href="/manager/proprietes" class="btn-manager">Voir les propriétés</a>
         </div>
         <div class="manager-section">
-            <h2 class="manager-gradient-title">Contrats & paiements</h2>
-            <p>Contrats actifs : <strong><?= $stats['contrats'] ?? '--' ?></strong><br> Paiements enregistrés : <strong><?= $stats['paiements'] ?? '--' ?></strong></p>
-            <a href="/manager/contrats" class="btn-manager">Voir les contrats</a>
+            <h2 class="manager-gradient-title"><!--Contrats &--> paiements</h2>
+           <p> <? /*Contrats actifs : <strong><?= $stats['contrats'] ?? '--' ?></strong><br> */?>Paiements enregistrés : <strong><?= $nb_paiements ?? '--' ?></strong></p>
+           <?// <a href="/manager/contrats" class="btn-manager">Voir les contrats</a>?>
             <a href="/manager/paiements" class="btn-manager btn-secondary">Voir les paiements</a>
         </div>
-        <div class="manager-section">
+    <?/*    <div class="manager-section">
             <h2 class="manager-gradient-title">Statistiques globales</h2>
             <p>Dernière connexion : <strong><?= $_SESSION['manager_last_login'] ?? '--' ?></strong></p>
             <a href="/manager/configuration" class="btn-manager btn-secondary">Configuration</a>
-        </div>
+        </div>*/?>
     </div>
 </div>
 

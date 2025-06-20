@@ -203,6 +203,18 @@ class ManagerBDD extends Manager {
         $stmt = $this->pdo->query("SELECT COUNT(*) FROM propriete");
         return (int)$stmt->fetchColumn();
     }
+    
+    //compter les contrats
+    public function countContrats(): int {
+        $stmt = $this->pdo->query("SELECT COUNT(*) FROM contrat");
+        return (int)$stmt->fetchColumn();
+    }
+
+    //compter les paiements
+    public function countPaiements(): int {
+        $stmt = $this->pdo->query("SELECT COUNT(*) FROM paiement");
+        return (int)$stmt->fetchColumn();
+    }
 
     // Ajouter un agent
     public function addAgent(\model\Agent $agent): bool {

@@ -1039,3 +1039,49 @@
         gap: 1.2rem;
     }
 }
+.manager-profile-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    padding: 32px 24px;
+}
+
+.manager-profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.manager-profile-details {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+    width: 100%;
+}
+
+.manager-profile-details li {
+    margin-bottom: 12px;
+    font-size: 1.1em;
+}
+
+.profile-label {
+    color: #888;
+    min-width: 120px;
+    display: inline-block;
+}
+
+.btn.btn-edit {
+    background: #1976d2;
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.btn.btn-edit:hover {
+    background: #125ea2;
+}

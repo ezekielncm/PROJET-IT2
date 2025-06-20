@@ -409,11 +409,15 @@ class ManagerControllers extends Controllers
         $nb_bailleurs = $this->managerBDD->countBailleurs();
         $nb_agents = $this->managerBDD->countAgents();
         $nb_proprietes = $this->managerBDD->countProprietes();
+        $nb_paiements = $this->managerBDD->countPaiements();
+        $nb_users = $nb_agents + $nb_bailleurs + $nb_clients;
         $this->render('manager/dash', [
             'nb_clients' => $nb_clients,
             'nb_bailleurs' => $nb_bailleurs,
             'nb_agents' => $nb_agents,
-            'nb_proprietes' => $nb_proprietes
+            'nb_proprietes' => $nb_proprietes,
+            'nb_users' => $nb_users,
+            'nb_paiements' => $nb_paiements
         ]);
     }
 
@@ -485,7 +489,7 @@ class ManagerControllers extends Controllers
         $managers = $this->managerBDD->getManagerById($id);
         if (count($managers) > 0) {
             $manager = $managers[0]['objet'];
-            $this->render('manager/profile/vue', ['manager' => $manager]);
+            $this->render('manager/profile', ['manager' => $manager]);
         } else {
             $this->render('error/404');
         }
@@ -521,7 +525,7 @@ class ManagerControllers extends Controllers
         $this->requireManagerAuth();
         $contratBDD = new \model\ContratBDD();
         $contrats = $contratBDD->getAllContrats();
-        $this->render('manager/contrat/liste', ['contrats' => $contrats]);
+        $this->render('manager/contrats', ['contrats' => $contrats]);
     }
 
     // Lister les paiements
